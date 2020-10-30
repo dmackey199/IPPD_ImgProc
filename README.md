@@ -1,1 +1,3 @@
-# IPPD_ImgProc
+# openCV-software
+
+The image processing software using OpenCV.
