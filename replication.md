@@ -49,7 +49,7 @@ To increase swap size:
 sudo dphys-swapfile swapoff
 sudo nano /etc/dphys-swapfile
 Use arrow keys to maneuver down to CONF_SWAPSIZE variable
-The default should be 100, but chnage that to 1024 or 2048
+The default should be 100, but change that to 1024 or 2048
 To save changes, do Ctrl+O then ENTER to save, and then Ctrl+X to exit the file.
 sudo dphys-swapfile setup
 sudo dphys-swapfile swapon
