@@ -2,4 +2,4 @@
 
 cmake .\
 make\
-./DisplayImage dog.jpg\
+./DisplayImage dog.jpg
