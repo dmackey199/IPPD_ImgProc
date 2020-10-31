@@ -42,6 +42,9 @@ If above does not work, try "cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PR
 make -j1 (-j1 specifies to only use one processor, which makes it slower to build, but is safer since multiple processors could make it freeze)
 sudo make install
 
+# UPON FINISHING
+Check out the test folder and test.md to check if everything is working!
+
 # TROUBLESHOOTING
 
 Still freezing on make? Maybe the Raspberry Pi is swapping itself to death. You can open a separate terminal and type "free" to look at it.
