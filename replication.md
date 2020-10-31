@@ -1,25 +1,25 @@
 # PARTS NEEDED
 
-HDMI Cord
-Keyboard
-Mouse
-SD Card (32 GB minimum)
-USB Charger Type B (typical Android charger)
-Raspberry Pi
+HDMI Cord  
+Keyboard  
+Mouse  
+SD Card (32 GB minimum)  
+USB Charger Type B (typical Android charger)  
+Raspberry Pi  
 
 # STEPS
 
-Download the Raspberry Pi OS at
-https://www.raspberrypi.org/downloads/raspberry-pi-os/
+Download the Raspberry Pi OS at  
+https://www.raspberrypi.org/downloads/raspberry-pi-os/  
 
-Download the Raspberry Pi Imager (used to download Raspberry Pi OS onto SD Card)
-https://www.raspberrypi.org/downloads/
+Download the Raspberry Pi Imager (used to download Raspberry Pi OS onto SD Card)  
+https://www.raspberrypi.org/downloads/  
 
-Insert SD Card into your device
-Open Raspberry Pi Imager
-Select your SD Card
-Select your Raspberry Pi OS
-Click Write
+Insert SD Card into your device  
+Open Raspberry Pi Imager  
+Select your SD Card  
+Select your Raspberry Pi OS  
+Click Write  
 
 Plug in keyboard, mouse, and USB charger (power supply), into your Raspberry Pi. Plug HDMI cord to Raspberry Pi and a monitor/TV.
 Once loaded in, open Raspberry Pi terminal (on the top task bar)
