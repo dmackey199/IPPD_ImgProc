@@ -1,5 +1,5 @@
 # Test
 
-cmake .
-make
-./DisplayImage dog.jpg
+cmake .\
+make\
+./DisplayImage dog.jpg\
