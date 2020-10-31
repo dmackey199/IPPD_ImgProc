@@ -1,4 +1,11 @@
-# PARTS NEEDED
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+  - [Parts Needed](#parts-needed)
+  - [Steps](#steps)
+  - [Upon Finishing](#upon-finishing)
+  - [Troubleshooting](#troubleshooting)
+
+## Parts Needed
 
 HDMI Cord  
 Keyboard  
@@ -7,7 +14,7 @@ SD Card (32 GB minimum)
 USB Charger Type B (typical Android charger)  
 Raspberry Pi  
 
-# STEPS
+## Steps
 
 Download the Raspberry Pi OS at  
 https://www.raspberrypi.org/downloads/raspberry-pi-os/  
@@ -55,10 +62,10 @@ make -j1
 sudo make install  
 ```
 
-# UPON FINISHING
+## Upon Finishing
 Check out the test folder and test.md to check if everything is working!
 
-# TROUBLESHOOTING
+## Troubleshooting
 
 Still freezing on make? Maybe the Raspberry Pi is swapping itself to death. You can open a separate terminal and type "free" to look at it.  
 **To increase swap size:**
