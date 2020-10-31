@@ -29,6 +29,7 @@ Once loaded in, open Raspberry Pi terminal (on the top task bar)
 
 Create a directory where to store Open CV files (Desktop recommended e.g. ~/Desktop/<my_directory>)  
 Here is an example:  
+```
     cd Desktop  
     mkdir ImgProc  
     cd ImgProc  
@@ -38,6 +39,7 @@ Here is an example:
     mkdir release  
     cd release  
     cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..  
+```
 If above does not work, try "cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local .." which just has no spaces after flags  
     make -j1 
 (-j1 specifies to only use one processor, which makes it slower to build, but is safer since multiple processors could make it freeze)  
