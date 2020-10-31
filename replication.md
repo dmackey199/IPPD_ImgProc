@@ -21,13 +21,13 @@ Select your SD Card
 Select your Raspberry Pi OS  
 Click Write  
 
-Plug in keyboard, mouse, and USB charger (power supply), into your Raspberry Pi. Plug HDMI cord to Raspberry Pi and a monitor/TV.
-Once loaded in, open Raspberry Pi terminal (on the top task bar)
-sudo apt-get install build-essential
-sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+Plug in keyboard, mouse, and USB charger (power supply), into your Raspberry Pi. Plug HDMI cord to Raspberry Pi and a monitor/TV.  
+Once loaded in, open Raspberry Pi terminal (on the top task bar)  
+sudo apt-get install build-essential  
+sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev  
+sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev  
 
-Create a directory where to store Open CV files (Desktop recommended e.g. ~/Desktop/<my_directory>)
+Create a directory where to store Open CV files (Desktop recommended e.g. ~/Desktop/<my_directory>)  
 Here is an example:
 cd Desktop
 mkdir ImgProc
