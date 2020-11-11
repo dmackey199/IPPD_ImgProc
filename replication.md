@@ -34,24 +34,35 @@ Once loaded in, open Raspberry Pi terminal (on the top task bar)
 sudo apt-get install build-essential  
 sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev  
 sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev  
+sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
+sudo apt-get install qtbase5-dev  
+sudo apt-get install qtdeclarative5-dev   
+sudo apt-get install libgtk2.0-dev  
+```
+Create a directory where you can clone this directory!
+Here is an example: 
+``` 
+cd Desktop
+mkdir ImgProc  
+cd ImgProc  
+git clone https://github.com/dmackey199/IPPD_ImgProc.git
 ```
 
 Create a directory where to store Open CV files (Desktop recommended e.g. ~/Desktop/<my_directory>)  
 Here is an example:  
 ```
 cd Desktop  
-mkdir ImgProc  
-cd ImgProc  
+mkdir OpenCV  
+cd OpenCV  
 git clone https://github.com/opencv/opencv.git  
-git clone https://github.com/opencv/opencv_contrib.git  
 cd opencv  
 mkdir release  
 cd release  
-cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..  
+cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_EXAMPLES=ON -D WITH_QT=ON -D WITH_GTK=ON -D WITH_OPENGL=ON .. 
 ```
 If above does not work, try  
 ```
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..  
+cmake -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local -DWITH_TBB=ON -DBUILD_NEW_PYTHON_SUPPORT=ON -DWITH_V4L=ON -DINSTALL_C_EXAMPLES=ON -DINSTALL_PYTHON_EXAMPLES=ON -DBUILD_EXAMPLES=ON -DWITH_QT=ON -DWITH_GTK=ON -DWITH_OPENGL=ON .. 
 ```
  which just has no spaces after flags -D.  
 ```
@@ -63,7 +74,8 @@ sudo make install
 ```
 
 ## Upon Finishing
-Check out the test folder and test.md to check if everything is working!
+Check out the test folder within our cloned directory and test.md to check if everything is working!
+Ex: cd Desktop/ImgProc/IPPD_ImgProc
 
 ## Troubleshooting
 
