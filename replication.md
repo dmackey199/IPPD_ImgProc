@@ -37,7 +37,6 @@ sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libp
 sudo apt-get install libglfw3-dev libgl1-mesa-dev libglu1-mesa-dev
 sudo apt-get install qtbase5-dev  
 sudo apt-get install qtdeclarative5-dev   
-sudo apt-get install libgtk2.0-dev  
 ```
 Create a directory where you can clone this directory!
 Here is an example: 
