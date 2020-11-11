@@ -1,3 +1,3 @@
 # openCV-software
 
-The image processing software using OpenCV.
+The image processing software using OpenCV library.
