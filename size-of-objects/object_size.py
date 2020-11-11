@@ -18,6 +18,23 @@ import cv2
 def midpoint(ptA, ptB):
     return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
 
+#from https://stackoverflow.com/questions/35180764/opencv-python-image-too-big-to-display
+def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
+    dim = None
+    (h, w) = image.shape[:2]
+
+    if width is None and height is None:
+        return image
+    if width is None:
+        r = height / float(h)
+        dim = (int(w * r), height)
+    else:
+        r = width / float(w)
+        dim = (width, int(h * r))
+
+    return cv2.resize(image, dim, interpolation=inter)
+
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
@@ -44,8 +61,12 @@ cnts = imutils.grab_contours(cnts)
 
 # sort the contours from left-to-right and initialize the
 # 'pixels per metric' calibration variable
-(cnts, _) = contours.sort_contours(cnts)
+#(cnts, _) = contours.sort_contours(cnts)
+
+cnts = sorted(cnts, key=cv2.contourArea, reverse=True) [:2]
+
 pixelsPerMetric = None
+
 
 # loop over the contours individually
 for c in cnts:
@@ -110,12 +131,13 @@ for c in cnts:
 
     # draw the object sizes on the image
     cv2.putText(orig, "{:.2f}mm".format(dimA),
-        (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_SIMPLEX,
-        0.65, (255, 255, 255), 2)
+        (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_TRIPLEX,
+        4, (255, 255, 255), 2)
     cv2.putText(orig, "{:.2f}mm".format(dimB),
-        (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
-        0.65, (255, 255, 255), 2)
+        (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_TRIPLEX,
+        4, (255, 255, 255), 2)
 
     # show the output image
-    cv2.imshow("Image", orig)
+    resize = ResizeWithAspectRatio(orig, height=540)
+    cv2.imshow("Image", resize)
     cv2.waitKey(0)
