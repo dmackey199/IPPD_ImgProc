@@ -1,6 +1,11 @@
 ## Interfacing the Camera
 Here is the tutorial used that is very helpful and includes pictures for installation.
 https://www.dexterindustries.com/howto/installing-the-raspberry-pi-camera/  
+
+1. Connect the camera following the tutorial above. The blue tape should face the ethernet port.
+2. Make sure the camer is enabled: Preferences > Raspberry Pi Configuration > interfaces > enable camera
+3. For changes to take affect, the pi must be rebooted.
+
 Upon reboot, type  
 ```
 vcgencmd get_camera
