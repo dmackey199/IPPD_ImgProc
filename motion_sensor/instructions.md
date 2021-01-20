@@ -7,4 +7,6 @@ https://www.raspberrypi.org/documentation/usage/gpio/
 The pinout for the pir (motion sensor):  
 https://www.homemade-circuits.com/pir-sensor-datasheet-pinout-specification-working/  
 
+For pir.py, sensor is connected to pin 8/GPIO 14.
+
 To run: python pir.py

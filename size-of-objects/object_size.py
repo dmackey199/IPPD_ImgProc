@@ -65,6 +65,7 @@ cnts = imutils.grab_contours(cnts)
 
 cnts = sorted(cnts, key=cv2.contourArea, reverse=True) [:2]
 
+
 pixelsPerMetric = None
 
 

@@ -8,6 +8,20 @@ import argparse
 import imutils
 import cv2
 import RPi.GPIO as GPIO
+import matplotlib
+matplotlib.use('Agg')
+from matplotlib import pyplot as plt
+import glob
+
+def auto_canny(image, sigma=0.33):
+    # compute the median of the single channel pixel intensities
+    v = np.median(image)
+    # apply automatic Canny edge detection using the computed median
+    lower = int(max(0, (1.0 - sigma) * v))
+    upper = int(min(255, (1.0 + sigma) * v))
+    edged = cv2.Canny(image, lower, upper)
+    # return the edged image
+    return edged
 
 def midpoint(ptA, ptB):
     return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
@@ -54,7 +68,7 @@ GPIO.setup(8, GPIO.IN)         #Read output from PIR motion sensor
 camera = PiCamera()
 camera.resolution = (2592, 1944)
 camera.framerate = 15
-i = GPIO.input(8)
+i = 0
 
 while i == 0:
     i = GPIO.input(8)
@@ -76,38 +90,26 @@ args = vars(ap.parse_args())
 image = cv2.imread('image.jpg')
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.GaussianBlur(gray, (7, 7), 0)
-
 # perform edge detection, then perform a dilation + erosion to
 # close gaps in between object edges
 edged = cv2.Canny(gray, 50, 100)
 edged = cv2.dilate(edged, None, iterations=1)
 edged = cv2.erode(edged, None, iterations=1)
-
 # find contours in the edge map
-cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,
+cnts = cv2.findContours(edged.copy(), cv2.RETR_TREE,
     cv2.CHAIN_APPROX_SIMPLE)
 cnts = imutils.grab_contours(cnts)
-
-num = str(len(cnts))
-print(num + ' object(s) detected')
-
 # sort the contours from left-to-right and initialize the
 # 'pixels per metric' calibration variable
 #(cnts, _) = contours.sort_contours(cnts)
-
-#cnts = sorted(cnts, key=cv2.contourArea, reverse=True) [:2]
-
-(cnts, boundingBoxes) = sort_contours(cnts, method="top-to-bottom")
-cnts = cnts [:2]
-
+#(cnts, boundingBoxes) = sort_contours(cnts, "top-to-bottom")
+cnts = sorted(cnts, key=cv2.contourArea, reverse=True) [:5]
 pixelsPerMetric = None
-
-i = 0
 
 # loop over the contours individually
 for c in cnts:    
     # if the contour is not sufficiently large, ignore it
-    if cv2.contourArea(c) < 100:
+    if cv2.contourArea(c) < 200:
         continue
 
     # compute the rotated bounding box of the contour
@@ -165,7 +167,7 @@ for c in cnts:
     dimA = dA / pixelsPerMetric
     dimB = dB / pixelsPerMetric
 
-    # draw the object sizes on the image
+    # draw tsizes on the image
     cv2.putText(orig, "{:.2f}mm".format(dimA),
         (int(tltrX - 15), int(tltrY - 10)), cv2.FONT_HERSHEY_TRIPLEX,
         4, (255, 255, 255), 2)
@@ -176,7 +178,4 @@ for c in cnts:
     # show  the output image
     resize = ResizeWithAspectRatio(orig, height=540)
     cv2.imshow("Image", resize)
-    i += 1
-    num = str(i)
-    cv2.imwrite('out' + num + '.jpg', resize)
     cv2.waitKey(0)
