@@ -74,6 +74,10 @@ for frame in camera.capture_continuous(rawCap, format="bgr", use_video_port=True
     if circles is not None:
         circles = np.uint16(np.around(circles))
         if len(circles[0, :]) == 2:
+            if circles[0][0][1] > circles[0][1][1]:
+                temp = np.copy(circles[0][0])
+                circles[0][0] = circles[0][1]
+                circles[0][1] = temp
             for i in circles[0, :]:
                 if pixelsPerMetric is None:
                     pixelsPerMetric = i[2] / args["width"]
@@ -84,7 +88,7 @@ for frame in camera.capture_continuous(rawCap, format="bgr", use_video_port=True
                 cv.circle(src, center, i[2], (255, 0, 255), 3)
                 cv.putText(src, "{:.2f}mm".format(size),
                     center, cv.FONT_HERSHEY_TRIPLEX,
-                    2, (0, 255, 255), 2)
+                    2, (10, 202, 55), 2)
             resize = ResizeWithAspectRatio(src, height=540)
             filename = 'image' + str(a) + '.jpg'
             a = a + 1
