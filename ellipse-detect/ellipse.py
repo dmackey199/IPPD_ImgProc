@@ -4,7 +4,7 @@ import cv2
 import numpy as np 
   
 # Load image 
-image = cv2.imread('C://gfg//images//blobs.jpg', 0) 
+image = cv2.imread('blobs.jpg', 0) 
   
 # Set our filtering parameters 
 # Initialize parameter settiing using cv2.SimpleBlobDetector 
