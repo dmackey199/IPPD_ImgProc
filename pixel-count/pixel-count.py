@@ -103,5 +103,6 @@ while(1):
  k = cv2.waitKey(10) & 0xFF
  if k == 27:
     break
-print cv2.countNonZero(thresh)
+print "Pixel Count: " + cv2.countNonZero(thresh)
+print "Area is mm"
 cv2.destroyAllWindows()
