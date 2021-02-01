@@ -1,0 +1,34 @@
+
+Image		ID		Date and Time		Measurement
+0		X		Jan-31-2021 20:48:25		4.0
+1		X		Jan-31-2021 20:48:26		4.333333333333333
+2		X		Jan-31-2021 20:48:27		4.333333333333333
+3		X		Jan-31-2021 20:48:27		5.2
+4		X		Jan-31-2021 20:48:29		4.545454545454546
+lowest: 4.0		highest: 5.2		average: 4.482424242424242
+
+Date: Jan-31-2021Image	ID		Time		Measurement
+0		X		20:51:49	3.7777777777777777
+1		X		20:51:54	4.0
+2		X		20:51:54	4.5
+3		X		20:52:03	4.0
+4		X		20:52:04	3.7777777777777777
+lowest: 3.7777777777777777		highest: 4.5		average: 4.011111111111111
+
+Date: Jan-31-2021
+Image	ID		Time		Measurement
+0		X		20:52:43	4.25
+1		X		20:52:49	4.75
+2		X		20:52:51	4.0
+3		X		20:53:11	4.5
+4		X		20:53:12	4.5
+lowest: 4.0		highest: 4.75		average: 4.4
+
+Date: Jan-31-2021
+Image	ID		Time		Measurement
+0		X		21:00:00	4.0
+1		X		21:00:01	4.5
+2		X		21:00:02	4.0
+3		X		21:00:12	5.5
+4		X		21:00:15	4.25
+lowest: 4.0		highest: 5.5		average: 4.45
