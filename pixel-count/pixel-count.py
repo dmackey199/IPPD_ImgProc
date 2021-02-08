@@ -1,10 +1,10 @@
 #Courtesy of https://stackoverflow.com/questions/45836214/opencv-python-count-pixels
 
 import numpy as np
-import cv2 as cv
+import cv2
 import argparse
 
-def ResizeWithAspectRatio(image, width=None, height=None, inter=cv.INTER_AREA):
+def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
 
@@ -17,7 +17,7 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv.INTER_AREA):
         r = width / float(w)
         dim = (width, int(h * r))
 
-    return cv.resize(image, dim, interpolation=inter)
+    return cv2.resize(image, dim, interpolation=inter)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("-w", "--width", type=float, required=True,
@@ -29,7 +29,7 @@ img=cv2.imread("circles.png",0)
 
     ## [convert_to_gray]
     # Convert it to gray
-gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(img, cv.COLOR_BGR2GRAY)
 ## [convert_to_gray]
 
 ## [reduce_noise]
@@ -39,7 +39,7 @@ gray = cv2.medianBlur(img, 5)
 
 # ## [houghcircles]
 rows = gray.shape[0]
-circles = cv2.HoughCircles(gray, cv.HOUGH_GRADIENT, 1, rows / 8,
+circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
                             param1=100, param2=30,
                             minRadius=0, maxRadius=30)
 # ## [houghcircles]
@@ -68,9 +68,9 @@ if circles is not None:
             # else:
             #     unknown = True
 
-            cv.circle(img, center, i[2], (255, 0, 255), 3)
-            cv.putText(img, "{:.2f}mm".format(size),
-                center, cv.FONT_HERSHEY_TRIPLEX,
+            cv2.circle(img, center, i[2], (255, 0, 255), 3)
+            cv2.putText(img, "{:.2f}mm".format(size),
+                center, cv2.FONT_HERSHEY_TRIPLEX,
                 2, (10, 202, 55), 2)
         # resize = ResizeWithAspectRatio(src, height=540)
         # filename = 'Image' + str(a) + '-Mouse' + args["id"] + '.jpg'
