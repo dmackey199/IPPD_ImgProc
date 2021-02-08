@@ -34,7 +34,7 @@ while(1):
    img = cv2.resize(img, None, fx = 0.25,fy = 0.25)
 
    cv2.namedWindow('real image')
-   cv2SetMouseCallback('real image', on_mouse, 0)
+   cv2.SetMouseCallback('real image', on_mouse, 0)
    cv2.imshow('real image', img)
    if count < 50:
        if cv2.waitKey(33) == 27:
