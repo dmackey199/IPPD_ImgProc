@@ -107,6 +107,7 @@ while(1):
   a = cv2.getTrackbarPos('min','image')
   b = cv2.getTrackbarPos('max','image')
   ret,thresh=cv2.threshold(img,a,b,cv2.THRESH_BINARY_INV)
+  clone = thresh;
   cv2.imshow("output",thresh)
   k = cv2.waitKey(10) & 0xFF
   if k == 27:
