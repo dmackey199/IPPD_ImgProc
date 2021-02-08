@@ -6,9 +6,10 @@ import argparse
 
 refPt = []
 cropping = False
+roi = cv2.imread("circles.png",0)
 def click_and_crop(event, x, y, flags, param):
 	# grab references to the global variables
-	global refPt, cropping
+	global refPt, cropping, roi
 	# if the left mouse button was clicked, record the starting
 	# (x, y) coordinates and indicate that cropping is being
 	# performed
