@@ -24,7 +24,7 @@ def click_and_crop(event, x, y, flags, param):
 		cropping = False
 		# draw a rectangle around the region of interest
 		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
-		cv2.imshow("crop", roi)
+		cv2.imshow("debug", roi)
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
@@ -108,7 +108,7 @@ while(1):
   ret,thresh=cv2.threshold(img,a,b,cv2.THRESH_BINARY_INV)
   clone = thresh;
   cv2.imshow("output",thresh)
-
+  k = cv2.waitKey(10) & 0xFF
   if k == ord("r"):
 		thresh = clone.copy()
 	# if the 'c' key is pressed, break from the loop
