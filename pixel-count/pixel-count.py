@@ -4,6 +4,27 @@ import numpy as np
 import cv2
 import argparse
 
+refPt = []
+cropping = False
+def click_and_crop(event, x, y, flags, param):
+	# grab references to the global variables
+	global refPt, cropping
+	# if the left mouse button was clicked, record the starting
+	# (x, y) coordinates and indicate that cropping is being
+	# performed
+	if event == cv2.EVENT_LBUTTONDOWN:
+		refPt = [(x, y)]
+		cropping = True
+	# check to see if the left mouse button was released
+	elif event == cv2.EVENT_LBUTTONUP:
+		# record the ending (x, y) coordinates and indicate that
+		# the cropping operation is finished
+		refPt.append((x, y))
+		cropping = False
+		# draw a rectangle around the region of interest
+		cv2.rectangle(image, refPt[0], refPt[1], (0, 255, 0), 2)
+		cv2.imshow("image", image)
+
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
@@ -92,19 +113,32 @@ def nothing(x):
 
 cv2.namedWindow('image')
 
+clone = gray.copy()
+
 cv2.createTrackbar('min','image',0,255,nothing)
 cv2.createTrackbar('max','image',0,255,nothing)
+cv2.setMouseCallback("output", click_and_crop)
 
 while(1):
 
- a = cv2.getTrackbarPos('min','image')
- b = cv2.getTrackbarPos('max','image')
- ret,thresh=cv2.threshold(img,a,b,cv2.THRESH_BINARY_INV)
- cv2.imshow("output",thresh)
- k = cv2.waitKey(10) & 0xFF
- if k == 27:
+  a = cv2.getTrackbarPos('min','image')
+  b = cv2.getTrackbarPos('max','image')
+  ret,thresh=cv2.threshold(img,a,b,cv2.THRESH_BINARY_INV)
+  cv2.imshow("output",thresh)
+  k = cv2.waitKey(10) & 0xFF
+  if k == 27:
     break
- calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
-print "Pixel Count: ", cv2.countNonZero(thresh)
-print "Area is mm: ", calculatedArea
+  elif k == ord("r"):
+		thresh = clone.copy()
+	# if the 'c' key is pressed, break from the loop
+  elif k == ord("c"):
+		break
+#  calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
+
+if len(refPt) == 2:
+  roi = clone[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
+  cv2.imshow("ROI", roi)
+  cv2.waitKey(0)
+# print "Pixel Count: ", cv2.countNonZero(thresh)
+# print "Area is mm: ", calculatedArea
 cv2.destroyAllWindows()
