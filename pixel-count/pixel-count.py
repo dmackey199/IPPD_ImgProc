@@ -22,8 +22,8 @@ def click_and_crop(event, x, y, flags, param):
 		refPt.append((x, y))
 		cropping = False
 		# draw a rectangle around the region of interest
-		cv2.rectangle(thresh, refPt[0], refPt[1], (255, 255, 255), 2)
-		cv2.imshow("thresh", thresh)
+		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
+		cv2.imshow("crop", roi)
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
