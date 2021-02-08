@@ -47,7 +47,6 @@ ap.add_argument("-w", "--width", type=float, required=True,
 args = vars(ap.parse_args())
 
 img=cv2.imread("circles.png",0)
-    # src = frame.array
 
     ## [convert_to_gray]
     # Convert it to gray
@@ -109,20 +108,22 @@ while(1):
   ret,thresh=cv2.threshold(img,a,b,cv2.THRESH_BINARY_INV)
   clone = thresh;
   cv2.imshow("output",thresh)
-  k = cv2.waitKey(10) & 0xFF
-  if k == 27:
-    break
-  elif k == ord("r"):
+
+  if k == ord("r"):
 		thresh = clone.copy()
 	# if the 'c' key is pressed, break from the loop
   elif k == ord("c"):
 		break
-#  calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
+
 
 if len(refPt) == 2:
   roi = clone[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
   cv2.imshow("ROI", roi)
-  cv2.waitKey(0)
-# print "Pixel Count: ", cv2.countNonZero(thresh)
-# print "Area is mm: ", calculatedArea
+  while(1):
+    k = cv2.waitKey(10) & 0xFF
+    calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
+    if k == 27:
+      break
+print "Pixel Count: ", cv2.countNonZero(roi)
+print "Area is mm: ", calculatedArea
 cv2.destroyAllWindows()
