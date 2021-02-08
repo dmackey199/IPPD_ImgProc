@@ -124,6 +124,7 @@ if len(refPt) == 2:
     calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
     if k == 27:
       break
+print "Pixels Per Metric: ", pixelsPerMetric
 print "Pixel Count: ", cv2.countNonZero(roi)
 print "Area is mm: ", calculatedArea
 cv2.destroyAllWindows()
