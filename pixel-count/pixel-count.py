@@ -2,6 +2,7 @@
 
 import numpy as np
 import cv2 as cv
+import argparse
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv.INTER_AREA):
     dim = None
