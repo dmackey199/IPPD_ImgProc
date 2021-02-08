@@ -83,25 +83,6 @@ if circles is not None:
             center = (i[0], i[1])
             # circle outline
             size = i[2] / pixelsPerMetric
-            # if (unknown):
-            #     measurements.append(size)
-            #     times.append(datetime.now().strftime("%H:%M:%S"))
-            # else:
-            #     unknown = True
-
-            # cv2.circle(img, center, i[2], (255, 0, 255), 3)
-            # cv2.putText(img, "{:.2f}mm".format(size),
-            #     center, cv2.FONT_HERSHEY_TRIPLEX,
-            #     2, (10, 202, 55), 2)
-        # resize = ResizeWithAspectRatio(src, height=540)
-        # filename = 'Image' + str(a) + '-Mouse' + args["id"] + '.jpg'
-        # a = a + 1
-        # cv.imwrite(filename, resize)
-        
-# resize = ResizeWithAspectRatio(img, height=540)
-# cv.imshow("Frame", resize)
-# key = cv.waitKey(1) & 0xFF
-# rawCap.truncate(0)
 
 ##
 
@@ -117,6 +98,7 @@ clone = gray.copy()
 
 cv2.createTrackbar('min','image',0,255,nothing)
 cv2.createTrackbar('max','image',0,255,nothing)
+cv2.namedWindow("output")
 cv2.setMouseCallback("output", click_and_crop)
 
 while(1):
