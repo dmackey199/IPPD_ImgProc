@@ -29,7 +29,7 @@ img=cv2.imread("circles.png",0)
 
     ## [convert_to_gray]
     # Convert it to gray
-gray = cv2.cvtColor(img, cv.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 ## [convert_to_gray]
 
 ## [reduce_noise]
