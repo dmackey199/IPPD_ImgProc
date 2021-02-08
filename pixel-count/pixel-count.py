@@ -68,10 +68,10 @@ if circles is not None:
             # else:
             #     unknown = True
 
-            cv2.circle(img, center, i[2], (255, 0, 255), 3)
-            cv2.putText(img, "{:.2f}mm".format(size),
-                center, cv2.FONT_HERSHEY_TRIPLEX,
-                2, (10, 202, 55), 2)
+            # cv2.circle(img, center, i[2], (255, 0, 255), 3)
+            # cv2.putText(img, "{:.2f}mm".format(size),
+            #     center, cv2.FONT_HERSHEY_TRIPLEX,
+            #     2, (10, 202, 55), 2)
         # resize = ResizeWithAspectRatio(src, height=540)
         # filename = 'Image' + str(a) + '-Mouse' + args["id"] + '.jpg'
         # a = a + 1
@@ -105,6 +105,6 @@ while(1):
  if k == 27:
     break
  calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
-print "Pixel Count: ", calculatedArea
-print "Area is mm"
+print "Pixel Count: ", cv2.countNonZero(thresh)
+print "Area is mm: ", calculatedArea
 cv2.destroyAllWindows()
