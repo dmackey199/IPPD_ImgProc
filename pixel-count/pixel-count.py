@@ -121,9 +121,9 @@ if len(refPt) == 2:
   cv2.imshow("ROI", roi)
   while(1):
     k = cv2.waitKey(10) & 0xFF
-    calculatedArea = cv2.countNonZero(thresh) * pixelsPerMetric
     if k == 27:
       break
+calculatedArea = cv2.countNonZero(roi) * pixelsPerMetric
 print "Pixels Per Metric: ", pixelsPerMetric
 print "Pixel Count: ", cv2.countNonZero(roi)
 print "Area is mm: ", calculatedArea
