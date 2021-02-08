@@ -46,7 +46,7 @@ circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
 
 pixelsPerMetric = None
 
-## [draw]
+# [draw]
 # unknown = False 
 if circles is not None:
     circles = np.uint16(np.around(circles))
