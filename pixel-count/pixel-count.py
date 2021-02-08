@@ -1,7 +1,7 @@
 #Courtesy of https://stackoverflow.com/questions/45836214/opencv-python-count-pixels
 
 import numpy as np
-import cv2
+import cv2 as cv
 
 def ResizeWithAspectRatio(image, width=None, height=None, inter=cv.INTER_AREA):
     dim = None
