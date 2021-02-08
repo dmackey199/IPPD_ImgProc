@@ -1,47 +1,44 @@
-import cv2
-#import cv2.cv as cv
-from time import time
-boxes = []
-def on_mouse(event, x, y, flags, params):
-   # global img
-   t = time()
+import numpy as np
+import cv2 
 
-   if event == cv2.CV_EVENT_LBUTTONDOWN:
-      print 'Start Mouse Position: '+str(x)+', '+str(y)
-      sbox = [x, y]
-      boxes.append(sbox)
-      # print count
-      # print sbox
+# Making The Blank Image
+image = np.zeros((512,512,3))
+drawing = False
+ix = 0
+iy = 0
+# Adding Function Attached To Mouse Callback
+def draw(event,x,y,flags,params):
+    global ix,iy,drawing
+    # Left Mouse Button Down Pressed
+    if(event==1):
+        drawing = True
+        ix = x
+        iy = y
+    if(event==0):
+        if(drawing==True):
+            #For Drawing Line
+            cv2.line(image,pt1=(ix,iy),pt2=(x,y),color=(255,255,255),thickness=3)
+            ix = x
+            iy = y
+            # For Drawing Rectangle
+            # cv2.rectangle(image,pt1=(ix,iy),pt2=(x,y),color=(255,255,255),thickness=3)
+    if(event==4):
+        drawing = False
 
-   elif event == cv2.CV_EVENT_LBUTTONUP:
-      print 'End Mouse Position: '+str(x)+', '+str(y)
-      ebox = [x, y]
-      boxes.append(ebox)
-      print boxes
-      crop = img[boxes[-2][1]:boxes[-1][1],boxes[-2][0]:boxes[-1][0]]
 
-      cv2.imshow('crop',crop)
-      k =  cv2.waitKey(0)
-      if ord('r')== k:
-         cv2.imwrite('Crop'+str(t)+'.jpg',crop)
-         print "Written to file"
 
-count = 0
-while(1):
-   count += 1
-   img = cv2.imread('circles.png',0)
-   # img = cv2.blur(img, (3,3))
-   img = cv2.resize(img, None, fx = 0.25,fy = 0.25)
+# Making Window For The Image
+cv2.namedWindow("Window")
 
-   cv2.namedWindow('real image')
-   cv2.SetMouseCallback('real image', on_mouse, 0)
-   cv2.imshow('real image', img)
-   if count < 50:
-       if cv2.waitKey(33) == 27:
-           cv2.destroyAllWindows()
-           break
-       elif count >= 50:
-          if cv2.waitKey(0) == 27:
-             cv2.destroyAllWindows()
-             break
-          count = 0
+# Adding Mouse CallBack Event
+cv2.setMouseCallback("Window",draw)
+
+# Starting The Loop So Image Can Be Shown
+while(True):
+
+    cv2.imshow("Window",image)
+
+    if cv2.waitKey(20) & 0xFF == ord('q'):
+        break
+
+cv2.destroyAllWindows()
