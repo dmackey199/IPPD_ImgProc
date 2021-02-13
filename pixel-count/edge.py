@@ -11,7 +11,7 @@ image=cv2.imread("circles.png",0)
 #gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 gray = cv2.medianBlur(image, 5)
 # create a binary thresholded image
-_, binary = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY_INV)
+_, binary = cv2.threshold(gray, 130, 255, cv2.THRESH_BINARY_INV)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
