@@ -4,13 +4,14 @@ import cv2
 import matplotlib.pyplot as plt
 
 # read the image
-image = cv2.imread("circles.png")
+image=cv2.imread("circles.png",0)
 # convert to RGB
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+#image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 # convert to grayscale
-gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+#gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+gray = cv2.medianBlur(img, 5)
 # create a binary thresholded image
-_, binary = cv2.threshold(gray, 225, 255, cv2.THRESH_BINARY_INV)
+_, binary = cv2.threshold(gray, 170, 255, cv2.THRESH_BINARY_INV)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
