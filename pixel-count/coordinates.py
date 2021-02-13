@@ -7,11 +7,11 @@ import cv2
   
 # Reading image 
 font = cv2.FONT_HERSHEY_COMPLEX 
-img2 = cv2.imread('test.jpg', cv2.IMREAD_COLOR) 
+img2 = cv2.imread('circles.png', cv2.IMREAD_COLOR) 
   
 # Reading same image in another  
 # variable and converting to gray scale. 
-img = cv2.imread('test.jpg', cv2.IMREAD_GRAYSCALE) 
+img = cv2.imread('circles.png', cv2.IMREAD_GRAYSCALE) 
   
 # Converting image to a binary image 
 # ( black and white only image). 
