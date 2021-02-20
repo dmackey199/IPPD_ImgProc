@@ -1,7 +1,8 @@
 # Source: https://www.thepythoncode.com/article/contour-detection-opencv-python
-
+import numpy as np
 import cv2
 import matplotlib.pyplot as plt
+import argparse
 
 # https://www.pyimagesearch.com/2015/04/20/sorting-contours-using-python-and-opencv/
 def sort_contours(cnts, method="left-to-right"):
@@ -23,6 +24,11 @@ def sort_contours(cnts, method="left-to-right"):
 	# return the list of sorted contours and bounding boxes
 	return (cnts, boundingBoxes)
 
+
+ap = argparse.ArgumentParser()
+ap.add_argument("-w", "--width", type=float, required=True,
+    help="width of the left-most object in the image (in inches)")
+args = vars(ap.parse_args())
 
 # read the image
 #image=cv2.imread("circles.png",0)
