@@ -18,6 +18,11 @@ plt.imshow(binary, cmap="gray")
 plt.show()
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
+x,y,w,h = cv2.boundingRect(contours[0])
+img = cv2.rectangle(gray, (x, y), (x + w, y + h), (36,255,12), 1)
+cv2.putText(img, 'Fedex', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
+
 # draw all contours
 image = cv2.drawContours(gray, contours, -1, (0, 255, 0), 2)
 # show the image with the drawn contours
