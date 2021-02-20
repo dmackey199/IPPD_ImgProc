@@ -23,7 +23,7 @@ image = cv2.drawContours(gray, contours, -1, (0, 255, 0), 2)
 # show the image with the drawn contours
 plt.imshow(image)
 plt.show()
-print(contours)
+print(contours[0])
 
 
 # #CANNY
