@@ -3,6 +3,27 @@
 import cv2
 import matplotlib.pyplot as plt
 
+# https://www.pyimagesearch.com/2015/04/20/sorting-contours-using-python-and-opencv/
+def sort_contours(cnts, method="left-to-right"):
+	# initialize the reverse flag and sort index
+	reverse = False
+	i = 0
+	# handle if we need to sort in reverse
+	if method == "right-to-left" or method == "bottom-to-top":
+		reverse = True
+	# handle if we are sorting against the y-coordinate rather than
+	# the x-coordinate of the bounding box
+	if method == "top-to-bottom" or method == "bottom-to-top":
+		i = 1
+	# construct the list of bounding boxes and sort them from top to
+	# bottom
+	boundingBoxes = [cv2.boundingRect(c) for c in cnts]
+	(cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes),
+		key=lambda b:b[1][i], reverse=reverse))
+	# return the list of sorted contours and bounding boxes
+	return (cnts, boundingBoxes)
+
+
 # read the image
 #image=cv2.imread("circles.png",0)
 gray=cv2.imread("circles.png",0)
@@ -19,16 +40,19 @@ plt.show()
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-x,y,w,h = cv2.boundingRect(contours[0])
-img = cv2.rectangle(gray, (x, y), (x + w, y + h), (36,255,12), 1)
-cv2.putText(img, 'Fedex', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
+sorted_cnts, boundingBoxes = sort_contours(contours, "top-to-bottom")
+print(sorted_cnts[0])
+
+# x,y,w,h = cv2.boundingRect(contours[0])
+# img = cv2.rectangle(gray, (x, y), (x + w, y + h), (36,255,12), 1)
+# cv2.putText(img, 'Object', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
 
 # draw all contours
 image = cv2.drawContours(gray, contours, -1, (0, 255, 0), 2)
 # show the image with the drawn contours
 plt.imshow(image)
 plt.show()
-print(contours[0])
+# print(contours[0])
 
 
 # #CANNY
