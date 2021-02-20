@@ -39,6 +39,31 @@ _, binary = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY_INV)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
+
+rows = gray.shape[0]
+circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
+                            param1=100, param2=30,
+                            minRadius=0, maxRadius=30)
+# ## [houghcircles]
+
+pixelsPerMetric = None
+
+# [draw]
+# unknown = False 
+if circles is not None:
+    circles = np.uint16(np.around(circles))
+    if len(circles[0, :]) == 2:
+        if circles[0][0][1] > circles[0][1][1]:
+            temp = np.copy(circles[0][0])
+            circles[0][0] = circles[0][1]
+            circles[0][1] = temp
+        for i in circles[0, :]:
+            if pixelsPerMetric is None:
+                pixelsPerMetric = i[2] / args["width"]
+                
+            center = (i[0], i[1])
+            # circle outline
+            size = i[2] / pixelsPerMetric
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -63,5 +88,9 @@ plt.show()
 refArea = cv2.contourArea(sorted_cnts[0])
 objArea = cv2.contourArea(sorted_cnts[1])
 
+calculatedArea = objArea * pixelsPerMetric
+
+print "Pixels Per Metric: ", pixelsPerMetric
 print "Ref Area: ", refArea
 print "Obj Area: ", objArea
+print "Real Area in mm: ", calculatedArea
