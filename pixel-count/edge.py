@@ -53,7 +53,7 @@ img = cv2.rectangle(img, (x2, y2), (x2 + w2, y2 + h2), (36,255,12), 1)
 cv2.putText(img, 'Object', (x2, y2-10), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (36,255,12), 1)
 
 # draw all contours
-image = cv2.drawContours(img, sorted_cnts, -1, (0, 255, 0), 2)
+image = cv2.drawContours(img, sorted_cnts, -1, (0, 127, 0), 2)
 # show the image with the drawn contours
 plt.imshow(image)
 plt.show()
