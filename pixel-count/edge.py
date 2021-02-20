@@ -61,7 +61,7 @@ plt.imshow(image)
 plt.show()
 
 refArea = cv2.contourArea(sorted_cnts[0])
-objArea = cv2.contourArea(sorted_cnts[0])
+objArea = cv2.contourArea(sorted_cnts[1])
 
 print "Ref Area: ", refArea
 print "Obj Area: ", objArea
