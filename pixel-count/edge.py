@@ -19,7 +19,7 @@ plt.show()
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 # draw all contours
-image = cv2.drawContours(image, contours, -1, (0, 255, 0), 2)
+image = cv2.drawContours(gray, contours, -1, (0, 255, 0), 2)
 # show the image with the drawn contours
 plt.imshow(image)
 plt.show()
