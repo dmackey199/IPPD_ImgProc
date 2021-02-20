@@ -41,13 +41,13 @@ plt.show()
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 sorted_cnts, boundingBoxes = sort_contours(contours, "top-to-bottom")
-print(sorted_cnts[0])
+# print(sorted_cnts[0])
 x,y,w,h = cv2.boundingRect(sorted_cnts[0])
 img = cv2.rectangle(gray, (x, y), (x + w, y + h), (36,255,12), 1)
-cv2.putText(img, 'Object', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
+cv2.putText(img, 'Reference', (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (36,255,12), 2)
 
 # draw all contours
-image = cv2.drawContours(gray, contours, -1, (0, 255, 0), 2)
+image = cv2.drawContours(gray, sorted_cnts, -1, (0, 255, 0), 2)
 # show the image with the drawn contours
 plt.imshow(image)
 plt.show()
