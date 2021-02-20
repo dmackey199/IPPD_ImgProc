@@ -94,6 +94,7 @@ plt.show()
 refArea = cv2.contourArea(sorted_cnts[0])
 objArea = cv2.contourArea(sorted_cnts[1])
 
+# Formula = pixels^2 * (mm/pixels)^2 = mm^2 ??
 calculatedArea = objArea * ((1/pixelsPerMetric) ** 2)
 
 print "Pixels Per Metric: ", pixelsPerMetric
