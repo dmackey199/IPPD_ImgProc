@@ -26,8 +26,8 @@ def sort_contours(cnts, method="left-to-right"):
 
 
 ap = argparse.ArgumentParser()
-ap.add_argument("-w", "--width", type=float, required=True,
-    help="width of the left-most object in the image (in inches)")
+ap.add_argument("-a", "--area", type=float, required=True,
+    help="area of the left-most object in the image (in mm)")
 args = vars(ap.parse_args())
 
 # read the image
@@ -46,30 +46,30 @@ _, binary = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY_INV)
 plt.imshow(binary, cmap="gray")
 plt.show()
 
-rows = gray.shape[0]
-circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
-                            param1=100, param2=30,
-                            minRadius=0, maxRadius=30)
+# rows = gray.shape[0]
+# circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
+#                             param1=100, param2=30,
+#                             minRadius=0, maxRadius=30)
 # ## [houghcircles]
 
-pixelsPerMetric = None
+# pixelsPerMetric = None
 
 # [draw]
 # unknown = False 
-if circles is not None:
-    circles = np.uint16(np.around(circles))
-    if len(circles[0, :]) == 2:
-        if circles[0][0][1] > circles[0][1][1]:
-            temp = np.copy(circles[0][0])
-            circles[0][0] = circles[0][1]
-            circles[0][1] = temp
-        for i in circles[0, :]:
-            if pixelsPerMetric is None:
-                pixelsPerMetric = i[2] / args["width"]
+# if circles is not None:
+#     circles = np.uint16(np.around(circles))
+#     if len(circles[0, :]) == 2:
+#         if circles[0][0][1] > circles[0][1][1]:
+#             temp = np.copy(circles[0][0])
+#             circles[0][0] = circles[0][1]
+#             circles[0][1] = temp
+#         for i in circles[0, :]:
+#             if pixelsPerMetric is None:
+#                 pixelsPerMetric = i[2] / args["width"]
                 
-            center = (i[0], i[1])
-            # circle outline
-            size = i[2] / pixelsPerMetric
+#             center = (i[0], i[1])
+#             # circle outline
+#             size = i[2] / pixelsPerMetric
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -94,10 +94,13 @@ plt.show()
 refArea = cv2.contourArea(sorted_cnts[0])
 objArea = cv2.contourArea(sorted_cnts[1])
 
-# Formula = pixels^2 * (mm/pixels)^2 = mm^2 ??
-calculatedArea = objArea * ((1/pixelsPerMetric) ** 2)
+areaPerPixel = args["area"] / refArea;
+calculatedArea = objArea * areaPerPixel
 
-print "Pixels Per Metric: ", pixelsPerMetric
+# Formula = pixels^2 * (mm/pixels)^2 = mm^2 ??
+#calculatedArea = objArea * ((1/pixelsPerMetric) ** 2)
+
+print "Area Per Pixel: ", areaPerPixel
 print "Ref Area: ", refArea
 print "Obj Area: ", objArea
 print "Real Area in mm: ", calculatedArea
