@@ -34,7 +34,7 @@ args = vars(ap.parse_args())
 #image=cv2.imread("circles.png",0)
 # gray=cv2.imread("circles.png",0)
 # gray=cv2.imread("img1.png",0)
-gray=cv2.imread("img2.png",0)
+gray=cv2.imread("img3.png",0)
 # convert to RGB
 #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 # convert to grayscale
