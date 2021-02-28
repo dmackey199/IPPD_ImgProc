@@ -16,7 +16,7 @@ backup = ""
 
 sg.theme('BlueMono')   # Add a touch of color
 # All the stuff inside your window.
-layout = [  [sg.Text('Welcome to the Spiny Mouse Selfie!')],
+layout1 = [  [sg.Text('Welcome to the Spiny Mouse Selfie!')],
              [sg.Text('Please preview the camera to make sure the picture is clear')],
              [sg.Button('Preview Camera')],
             [sg.Text('Mouse ID: '), sg.InputText(mouseid)],
@@ -24,7 +24,9 @@ layout = [  [sg.Text('Welcome to the Spiny Mouse Selfie!')],
             [sg.Text('Press begin to begin')],
             [sg.Button('Begin'), sg.Button('Cancel')] ]
 
-layout1 = [  [sg.Text('The trigger will start the image process')]]
+layout2 = [  [sg.Text('The trigger will start the image process')]]
+
+layout = [[sg.Column(layout1, key='lay1'), sg.Column(layout2, visible=False, key='lay2')]]
 
 camera = PiCamera()
 camera.framerate = 100
@@ -32,9 +34,13 @@ camera.framerate = 100
 # need to add start button functionality
 
 # Create the Window
-window = sg.Window('Spiny Mouse Selfie', layout)
+window = sg.Window('Spiny Mouse Selfie', layout, finalize=True)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
+    mouseid = ""
+    window.FindElement('lay1').update(visible=True)
+    window.FindElement('lay2').update(visible=False)
+    window.Refresh()
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Cancel':   # if user closes window or clicks cancel
         window.close()
@@ -47,8 +53,9 @@ while True:
     elif event == 'Begin':
         mouseid = values[0]
         backup = values[1]
-        window.close()
-        window = sg.Window('Spiny Mouse Selfie', layout1)
+        window.FindElement('lay1').update(visible=False)
+        window.FindElement('lay2').update(visible=True)
+        window.Refresh()
         GPIO.setwarnings(False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(23, GPIO.IN, GPIO.PUD_UP)
@@ -65,6 +72,5 @@ while True:
         sleep(10)
         camera.stop_recording()
         camera.stop_preview()
-        window.close()
         fcopy = backup + "/" + name
         shutil.copyfile(name, fcopy)
