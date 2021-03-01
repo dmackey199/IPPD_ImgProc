@@ -22,8 +22,8 @@ contour_list = []
 for contour in contours:
     approx = cv2.approxPolyDP(contour, 0.01 * cv2.arcLength(contour, True), True)
     area = cv2.contourArea(contour)
-    # if 5000 < area < 15000:
-    contour_list.append(contour)
+    if area < 500:
+        contour_list.append(contour)
 
 msg = "Total holes: {}".format(len(approx)//2)
 cv2.putText(img, msg, (20, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2, cv2.LINE_AA)
