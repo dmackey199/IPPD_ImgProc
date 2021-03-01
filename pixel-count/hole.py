@@ -16,7 +16,7 @@ ret, thresh = cv2.threshold(blur, 127, 255, cv2.THRESH_OTSU)
 canny = cv2.Canny(thresh, 75, 200)
 # cv2.imshow('canny', canny)
 
-im2, contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(canny, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
 
 contour_list = []
 for contour in contours:
