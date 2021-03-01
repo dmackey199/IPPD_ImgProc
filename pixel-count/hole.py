@@ -25,6 +25,9 @@ for contour in contours:
     if area < 500:
         contour_list.append(contour)
 
+for cnt in contour_list:
+    print(cv2.contourArea(cnt))
+
 msg = "Total holes: {}".format(len(approx)//2)
 cv2.putText(img, msg, (20, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 2, cv2.LINE_AA)
 
