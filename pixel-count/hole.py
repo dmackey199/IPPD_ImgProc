@@ -55,7 +55,7 @@ params.maxThreshold = 200
 # Filter by Area.
 # params.filterByArea = False
 params.filterByArea = True
-params.minArea = 200
+params.minArea = 100
 
 # Filter by Circularity
 params.filterByCircularity = True
