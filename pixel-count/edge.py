@@ -61,11 +61,11 @@ sorted_cnts, boundingBoxes = sort_contours(contours, "right-to-left")
 #Show Positions of Objects
 x1,y1,w1,h1 = cv2.boundingRect(sorted_cnts[0])
 img = cv2.rectangle(gray, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
-cv2.putText(img, 'Reference', (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12), 1)
+cv2.putText(img, 'Reference', (x1, y1+h1+10), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12), 1)
 
 x2,y2,w2,h2 = cv2.boundingRect(sorted_cnts[1])
 img = cv2.rectangle(img, (x2, y2), (x2 + w2, y2 + h2), (36,255,12), 1)
-cv2.putText(img, 'Object', (x2, y2+h2+10), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12), 1)
+cv2.putText(img, 'Object', (x2, y2-10), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12), 1)
 
 # draw all contours
 image = cv2.drawContours(img, sorted_cnts, -1, (0, 127, 0), 2)
