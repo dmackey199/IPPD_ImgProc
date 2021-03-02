@@ -54,6 +54,10 @@ plt.show()
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
 print(len(contours))
+if len(contours) <= 1 :
+	print("Unable to detect 2 contours!")
+if len(contours) >= 3 :
+	print("Detecting more than 2 contours!")
 
 sorted_cnts, boundingBoxes = sort_contours(contours, "right-to-left")
 # print(sorted_cnts[0])
@@ -75,6 +79,9 @@ plt.show()
 
 refArea = cv2.contourArea(sorted_cnts[0])
 objArea = cv2.contourArea(sorted_cnts[1])
+
+if objArea > refArea :
+	print("Object appears to have greater area than reference!")
 
 areaPerPixel = args["area"] / refArea;
 calculatedArea = objArea * areaPerPixel
