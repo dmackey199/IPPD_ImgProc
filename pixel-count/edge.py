@@ -50,7 +50,8 @@ plt.imshow(binary, cmap="gray")
 plt.show()
 
 # find the contours from the thresholded image
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+# contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(binary, cv2.cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
 print(len(contours))
 
