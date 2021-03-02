@@ -53,7 +53,7 @@ plt.show()
 # contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-print(len(contours))
+print("Contours found: ", len(contours))
 if len(contours) <= 1 :
 	print("Unable to detect 2 contours!")
 if len(contours) >= 3 :
