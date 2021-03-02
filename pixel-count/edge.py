@@ -38,7 +38,7 @@ gray=cv2.imread("mouseimg_cropped2.png",0)
 #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 # convert to grayscale
 #gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-gray = cv2.medianBlur(image, 5)
+gray = cv2.medianBlur(gray, 5)
 # create a binary thresholded image
 ret, binary = cv2.threshold(gray, 207, 255, cv2.THRESH_BINARY_INV)
 # show it
