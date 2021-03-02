@@ -24,7 +24,6 @@ def sort_contours(cnts, method="left-to-right"):
 	# return the list of sorted contours and bounding boxes
 	return (cnts, boundingBoxes)
 
-
 ap = argparse.ArgumentParser()
 ap.add_argument("-a", "--area", type=float, required=True,
     help="area of the left-most object in the image (in mm)")
@@ -34,46 +33,29 @@ args = vars(ap.parse_args())
 #image=cv2.imread("circles.png",0)
 # gray=cv2.imread("circles.png",0)
 # gray=cv2.imread("img1.png",0)
-gray=cv2.imread("img3.png",0)
+gray=cv2.imread("mouseimg_cropped2.png",0)
 # convert to RGB
 #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 # convert to grayscale
 #gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-#gray = cv2.medianBlur(image, 5)
+gray = cv2.medianBlur(gray, 5)
 # create a binary thresholded image
-_, binary = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY_INV)
+ret, binary = cv2.threshold(gray, 207, 255, cv2.THRESH_BINARY_INV)
+# binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C,\
+#             cv2.THRESH_BINARY, 11, 2)
+# binary = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+# 			cv2.THRESH_BINARY,11,2)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
 
-# rows = gray.shape[0]
-# circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, rows / 8,
-#                             param1=100, param2=30,
-#                             minRadius=0, maxRadius=30)
-# ## [houghcircles]
-
-# pixelsPerMetric = None
-
-# [draw]
-# unknown = False 
-# if circles is not None:
-#     circles = np.uint16(np.around(circles))
-#     if len(circles[0, :]) == 2:
-#         if circles[0][0][1] > circles[0][1][1]:
-#             temp = np.copy(circles[0][0])
-#             circles[0][0] = circles[0][1]
-#             circles[0][1] = temp
-#         for i in circles[0, :]:
-#             if pixelsPerMetric is None:
-#                 pixelsPerMetric = i[2] / args["width"]
-                
-#             center = (i[0], i[1])
-#             # circle outline
-#             size = i[2] / pixelsPerMetric
 # find the contours from the thresholded image
-contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+# contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(binary, cv2.cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 
-sorted_cnts, boundingBoxes = sort_contours(contours, "top-to-bottom")
+print(len(contours))
+
+sorted_cnts, boundingBoxes = sort_contours(contours, "right-to-left")
 # print(sorted_cnts[0])
 
 #Show Positions of Objects
