@@ -41,10 +41,10 @@ gray=cv2.imread("mouseimg_cropped2.png",0)
 gray = cv2.medianBlur(gray, 5)
 # create a binary thresholded image
 # ret, binary = cv2.threshold(gray, 207, 255, cv2.THRESH_BINARY_INV)
-binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C,\
-            cv2.THRESH_BINARY, 11, 2)
-# binary = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
-# 			cv2.THRESH_BINARY,11,2)
+# binary = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C,\
+#             cv2.THRESH_BINARY, 11, 2)
+binary = cv2.adaptiveThreshold(gray,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,\
+			cv2.THRESH_BINARY,11,2)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
