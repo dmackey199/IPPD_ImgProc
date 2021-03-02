@@ -34,14 +34,14 @@ args = vars(ap.parse_args())
 #image=cv2.imread("circles.png",0)
 # gray=cv2.imread("circles.png",0)
 # gray=cv2.imread("img1.png",0)
-gray=cv2.imread("img3.png",0)
+gray=cv2.imread("mouseimg_cropped2.png",0)
 # convert to RGB
 #image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 # convert to grayscale
 #gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 #gray = cv2.medianBlur(image, 5)
 # create a binary thresholded image
-_, binary = cv2.threshold(gray, 80, 255, cv2.THRESH_BINARY_INV)
+_, binary = cv2.threshold(gray, 207, 255, cv2.THRESH_BINARY_INV)
 # show it
 plt.imshow(binary, cmap="gray")
 plt.show()
@@ -73,7 +73,7 @@ plt.show()
 # find the contours from the thresholded image
 contours, hierarchy = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-sorted_cnts, boundingBoxes = sort_contours(contours, "top-to-bottom")
+sorted_cnts, boundingBoxes = sort_contours(contours, "right-to-left")
 # print(sorted_cnts[0])
 
 #Show Positions of Objects

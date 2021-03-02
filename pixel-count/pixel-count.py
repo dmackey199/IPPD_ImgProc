@@ -6,7 +6,7 @@ import argparse
 
 refPt = []
 cropping = False
-roi = cv2.imread("mouseimg_cropped.png",0)
+roi = cv2.imread("mouseimg_cropped2.png",0)
 def click_and_crop(event, x, y, flags, param):
 	# grab references to the global variables
 	global refPt, cropping, roi
