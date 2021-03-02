@@ -42,7 +42,7 @@ import cv2
 import numpy as np
 
 # Read image
-im = cv2.imread("mouseimg_cropped.png", cv2.IMREAD_GRAYSCALE)
+im = cv2.imread("mouseimg_cropped2.png", cv2.IMREAD_GRAYSCALE)
 
 # Setup SimpleBlobDetector parameters.
 params = cv2.SimpleBlobDetector_Params()
