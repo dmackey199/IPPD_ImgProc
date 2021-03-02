@@ -48,8 +48,8 @@ im = cv2.imread("mouseimg_cropped2.png", cv2.IMREAD_GRAYSCALE)
 params = cv2.SimpleBlobDetector_Params()
 
 # Change thresholds
-params.minThreshold = 10
-params.maxThreshold = 200
+params.minThreshold = 207
+params.maxThreshold = 255
 
 
 # Filter by Area.
