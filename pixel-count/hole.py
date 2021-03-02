@@ -59,7 +59,7 @@ params.minArea = 10
 
 # Filter by Circularity
 params.filterByCircularity = True
-params.minCircularity = 0.7
+params.minCircularity = 0.5
 
 # Filter by Convexity
 params.filterByConvexity = False

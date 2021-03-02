@@ -46,7 +46,7 @@ ap.add_argument("-w", "--width", type=float, required=True,
     help="width of the left-most object in the image (in inches)")
 args = vars(ap.parse_args())
 
-img=cv2.imread("mouseimg_cropped.png",0)
+img=cv2.imread("mouseimg_cropped2.png",0)
 
     ## [convert_to_gray]
     # Convert it to gray
