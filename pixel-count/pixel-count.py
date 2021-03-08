@@ -6,7 +6,7 @@ import argparse
 
 refPt = []
 cropping = False
-roi = cv2.imread("mouseimg_cropped2.png",0)
+roi = cv2.imread("mouse.png",0)
 def click_and_crop(event, x, y, flags, param):
 	# grab references to the global variables
 	global refPt, cropping, roi
@@ -46,7 +46,7 @@ ap.add_argument("-w", "--width", type=float, required=True,
     help="width of the left-most object in the image (in inches)")
 args = vars(ap.parse_args())
 
-img=cv2.imread("mouseimg_cropped2.png",0)
+img=cv2.imread("mouse.png",0)
 
     ## [convert_to_gray]
     # Convert it to gray
@@ -118,6 +118,7 @@ while(1):
 
 if len(refPt) == 2:
   roi = clone[refPt[0][1]:refPt[1][1], refPt[0][0]:refPt[1][0]]
+  print(refPt)
   cv2.imshow("ROI", roi)
   while(1):
     k = cv2.waitKey(10) & 0xFF
