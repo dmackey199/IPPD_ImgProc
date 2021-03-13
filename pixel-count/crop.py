@@ -7,17 +7,17 @@ greedyCrop = [(177, 60), (281, 147)]
 def nothing(x):
   pass
 
-image = cv2.imread("img1.png")
 
-new_image = np.zeros(image.shape, image.dtype)
-alpha = 1.5;
-beta = 20;
-new_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
+# image = cv2.imread("img1.png")
+# new_image = np.zeros(image.shape, image.dtype)
+# alpha = 1.3;
+# beta = 20;
+# new_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
 
-cv2.imshow('Original Image', image)
-cv2.imshow('New Image', new_image)
-# Wait until user press some key
-cv2.waitKey()
+# cv2.imshow('Original Image', image)
+# cv2.imshow('New Image', new_image)
+# # Wait until user press some key
+# cv2.waitKey()
 
 # roi = cv2.imread("img1.png")
 # gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
@@ -47,21 +47,32 @@ cv2.waitKey()
 #   print("No Circles found")
 
 #thresholding
-# cv2.imshow("ROI", roi)
-# cv2.namedWindow('image')
-# cv2.createTrackbar('min','image',0,255,nothing)
-# cv2.createTrackbar('max','image',0,255,nothing)
-# cv2.namedWindow("output")
+roi = cv2.imread("img1.png")
+gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+clone = gray.copy()
+#roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
+roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]]
+image = np.zeros(roi.shape, roi.dtype)
+alpha = 1.3;
+beta = 20;
+roi = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
 
-# while(1):
-#   a = cv2.getTrackbarPos('min','image')
-#   b = cv2.getTrackbarPos('max','image')
-#   ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
-#   clone = thresh;
-#   cv2.imshow("output",thresh)
-#   k = cv2.waitKey(10) & 0xFF
-#   if k == ord("c"):
-# 		break
 
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+cv2.imshow("ROI", roi)
+cv2.namedWindow('image')
+cv2.createTrackbar('min','image',0,255,nothing)
+cv2.createTrackbar('max','image',0,255,nothing)
+cv2.namedWindow("output")
+
+while(1):
+  a = cv2.getTrackbarPos('min','image')
+  b = cv2.getTrackbarPos('max','image')
+  ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
+  clone = thresh;
+  cv2.imshow("output",thresh)
+  k = cv2.waitKey(10) & 0xFF
+  if k == ord("c"):
+		break
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
