@@ -9,7 +9,6 @@ def nothing(x):
 
 
 # image = cv2.imread("img1.png")
-# new_image = np.zeros(image.shape, image.dtype)
 # alpha = 1.3;
 # beta = 20;
 # new_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
@@ -52,10 +51,9 @@ gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 clone = gray.copy()
 #roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
 roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]]
-image = np.zeros(roi.shape, roi.dtype)
 alpha = 1.3;
 beta = 20;
-output = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
+output = cv2.convertScaleAbs(roi, alpha=alpha, beta=beta)
 
 
 cv2.imshow("ROI", output)
