@@ -55,10 +55,10 @@ roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]
 image = np.zeros(roi.shape, roi.dtype)
 alpha = 1.3;
 beta = 20;
-roi = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
+output = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
 
 
-cv2.imshow("ROI", roi)
+cv2.imshow("ROI", output)
 cv2.namedWindow('image')
 cv2.createTrackbar('min','image',0,255,nothing)
 cv2.createTrackbar('max','image',0,255,nothing)
@@ -67,7 +67,7 @@ cv2.namedWindow("output")
 while(1):
   a = cv2.getTrackbarPos('min','image')
   b = cv2.getTrackbarPos('max','image')
-  ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
+  ret,thresh=cv2.threshold(output,a,b,cv2.THRESH_BINARY_INV)
   clone = thresh;
   cv2.imshow("output",thresh)
   k = cv2.waitKey(10) & 0xFF
