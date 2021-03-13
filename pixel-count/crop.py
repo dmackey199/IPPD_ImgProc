@@ -11,7 +11,7 @@ image = cv2.imread("img1.png")
 
 new_image = np.zeros(image.shape, image.dtype)
 alpha = 2.0;
-beta = 50;
+beta = 20;
 new_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
 
 cv2.imshow('Original Image', image)
