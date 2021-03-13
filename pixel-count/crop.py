@@ -13,7 +13,7 @@ clone = gray.copy()
 #roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
 roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]]
 output = roi.copy()
-
+cv2.imshow("ROI", roi)
 
 circles = cv2.HoughCircles(roi, cv2.HOUGH_GRADIENT, 1, 50)
 if circles is not None:
