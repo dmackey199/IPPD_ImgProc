@@ -15,7 +15,7 @@ roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]
 output = roi.copy()
 
 
-circles = cv2.HoughCircles(roi, cv2.HOUGH_GRADIENT, 1.2, 100)
+circles = cv2.HoughCircles(roi, cv2.HOUGH_GRADIENT, 1, 50)
 if circles is not None:
 	# convert the (x, y) coordinates and radius of the circles to integers
 	circles = np.round(circles[0, :]).astype("int")
