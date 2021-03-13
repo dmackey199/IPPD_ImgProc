@@ -10,7 +10,7 @@ def nothing(x):
 image = cv2.imread("img1.png")
 
 new_image = np.zeros(image.shape, image.dtype)
-alpha = 1.0;
+alpha = 1.5;
 beta = 20;
 new_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
 
