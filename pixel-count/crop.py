@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 staticCrop = [(151, 62), (581, 173)] 
-greedyCrop: [(177, 60), (281, 147)]
+greedyCrop = [(177, 60), (281, 147)]
 
 roi = cv2.imread("img1.png",0)
 clone = roi.copy()
