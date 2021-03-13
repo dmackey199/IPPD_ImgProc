@@ -21,7 +21,6 @@ def click_and_crop(event, x, y, flags, param):
 		# record the ending (x, y) coordinates and indicate that
 		# the cropping operation is finished
 		refPt.append((x, y))
-        print(refPt)
 		cropping = False
 		# draw a rectangle around the region of interest
 		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
