@@ -16,7 +16,7 @@ output = roi.copy()
 cv2.imshow("ROI", roi)
 cv2.waitKey(0)
 
-circles = cv2.HoughCircles(roi, cv2.HOUGH_GRADIENT, 1, 50)
+circles = cv2.HoughCircles(roi, cv2.HOUGH_GRADIENT, 1, 10)
 if circles is not None:
 	# convert the (x, y) coordinates and radius of the circles to integers
 	circles = np.round(circles[0, :]).astype("int")
