@@ -78,8 +78,8 @@ def sort_contours(cnts, method="left-to-right"):
 	# return the list of sorted contours and bounding boxes
 	return (cnts, boundingBoxes)
 
-roi = cv2.imread("img2.png")
-gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+orig = cv2.imread("img2.png")
+gray = cv2.cvtColor(orig, cv2.COLOR_BGR2GRAY)
 clone = gray.copy()
 #roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
 roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]]
@@ -121,6 +121,13 @@ areaPerPixel = actualArea / refArea
 calculatedArea = objArea * areaPerPixel
 
 print(calculatedArea)
+
+cv2.imshow("Original", orig)
+cv2.imshow("ROI", roi)
+
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 
 
 #thresholding
