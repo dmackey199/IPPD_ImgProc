@@ -78,8 +78,8 @@ def sort_contours(cnts, method="left-to-right"):
 	# return the list of sorted contours and bounding boxes
 	return (cnts, boundingBoxes)
 
-orig = cv2.imread("img2.png")
-gray = cv2.cvtColor(orig, cv2.COLOR_BGR2GRAY)
+og = cv2.imread("img2.png")
+gray = cv2.cvtColor(og, cv2.COLOR_BGR2GRAY)
 clone = gray.copy()
 #roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
 roi = clone[greedyCrop[0][1]:greedyCrop[1][1], greedyCrop[0][0]:greedyCrop[1][0]]
@@ -87,7 +87,7 @@ alpha = 1.2;
 beta = 10;
 output = cv2.convertScaleAbs(roi, alpha=alpha, beta=beta)
 
-cv2.imshow("Orig", orig)
+cv2.imshow("og", og)
 cv2.imshow("Output", output)
 
 cv2.waitKey(0)
