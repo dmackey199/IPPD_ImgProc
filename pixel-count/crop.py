@@ -46,7 +46,7 @@ def nothing(x):
 #   print("No Circles found")
 
 #thresholding
-roi = cv2.imread("img1.png")
+roi = cv2.imread("img2.png")
 gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
 clone = gray.copy()
 #roi = clone[staticCrop[0][1]:staticCrop[1][1], staticCrop[0][0]:staticCrop[1][0]]
