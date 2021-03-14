@@ -111,6 +111,7 @@ cv2.putText(img, 'Object', (x1, y1-2), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12
 
 x2,y2,w2,h2 = cv2.boundingRect(sorted_cnts[1])
 img = cv2.rectangle(output, (x2, y2), (x2 + w2, y2 + h2), (255,36,12), 1)
+cv2.putText(img, 'Reference', (x1, y1+h1+2), cv2.FONT_HERSHEY_SIMPLEX, 0.2, (36,255,12), 1)
 
 # draw all contours
 image = cv2.drawContours(output, sorted_cnts, -1, (0, 127, 0), 2)
