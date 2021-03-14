@@ -19,17 +19,18 @@ GPIO.setup(23, GPIO.IN, GPIO.PUD_UP)
 GPIO.setup(24, GPIO.IN, GPIO.PUD_UP)
 
 camera = PiCamera()
-camera.resolution = (640,480)
-camera.framerate = 90
 
 mouseid = ""
 backup = ""
 secs = ""
+testsec = ""
 
 sg.theme('BlueMono')   # Add a touch of color
 # All the stuff inside your window.
 test_frame = [ [sg.Text('Here you can test the focus of the Camera and the IR Beams!', font=("Helvetica",12))],
                [sg.Text('If you are testing the IR Beams, please select "execute in terminal" upon start.', font=("Helvetica",12))],
+            [sg.Text('Test time (in seconds):', font=("Helvetica",12)), sg.InputText(testsec)],
+            [sg.Text('Camera Frame Rate:', font=("Helvetica",12)), sg.Radio('90', "fr", default=True, font=("Helvetica",12)), sg.Radio('60', "fr", font=("Helvetica",12)), sg.Radio('30', "fr", font=("Helvetica",12))],
              [sg.Button('Preview Camera', font=("Helvetica",12)), sg.Button('Test Left IR Beam', font=("Helvetica",12)), sg.Button('Test Right IR Beam', font=("Helvetica",12))] ]
 
 data_frame = [ [sg.Text('Please enter the animal ID, backup location, and direction.', font=("Helvetica",12))],
@@ -38,7 +39,7 @@ data_frame = [ [sg.Text('Please enter the animal ID, backup location, and direct
                 [sg.Text('Animal ID:', font=("Helvetica",12)), sg.InputText(mouseid)],
               [sg.Text('Data Backup Location:', font=("Helvetica",12)), sg.InputText(backup), sg.FolderBrowse(font=("Helvetica",12))],
             [sg.Text('The mouse is entering from the:', font=("Helvetica",12)), sg.Radio('Left', "direction", default=True, font=("Helvetica",12)), sg.Radio('Right', "direction", font=("Helvetica",12))],
-            [sg.Text('Recording time (if Beams are unavailable):', font=("Helvetica",12)), sg.InputText(secs)],
+            [sg.Text('Recording time in seconds (if Beams are unavailable):', font=("Helvetica",12)), sg.InputText(secs)],
             [sg.Button('Begin with Beams', font=("Helvetica",12)), sg.Button('Begin without Beams', font=("Helvetica",12))] ]
 
 col = [ [sg.Text('Welcome to the Spiny Mouse Selfie!', font=("Helvetica",25) )],
@@ -49,7 +50,7 @@ layout1 = [ [sg.Column(col), sg.Image(r'placeholderlogo.png')],
 
 layout2 = [  [sg.Text('The trigger will start the measuring process.', font=("Helvetica",16))]]
 
-layout3 = [  [sg.Text('Please check the terminal to see the output. The program will run for 30 seconds and then return to the main screen.', font=("Helvetica",16))]]
+layout3 = [  [sg.Text('Please check the terminal to see the output. The program will return to the main screen after the specified time.', font=("Helvetica",16))]]
 
 layout = [[sg.Column(layout1, key='lay1'), sg.Column(layout2, visible=False, key='lay2'), sg.Column(layout3, visible=False, key='lay3')]]
 
@@ -65,13 +66,23 @@ while True:
     window.FindElement('lay3').update(visible=False)
     window.Refresh()
     event, values = window.Read()
+    print(values)
+    if values[1]:
+        camera.resolution = (640,480) #90fps
+        camera.framerate = 90
+    elif values[2]:
+        camera.resolution = (1280,720) #60fps
+        camera.framerate = 60
+    else:
+        camera.resolution = (1920,1080) #30fps
+        camera.framerate = 30
     if event == sg.WIN_CLOSED:   # if user closes window or clicks cancel
         window.close()
         camera.close()
         quit()
     elif event == 'Preview Camera':
         camera.start_preview()
-        sleep(30)
+        sleep(int(values[0]))
         camera.stop_preview()
     elif event == 'Test Left IR Beam':
         window.FindElement('lay1').update(visible=False)
@@ -79,7 +90,7 @@ while True:
         window.FindElement('lay3').update(visible=True)
         window.Refresh()
         loops = 0
-        while loops < 600:
+        while (float(loops) * 0.05) < int(values[0]):
             i=GPIO.input(23)
             if i==1:                 #When output from motion sensor is LOW
                 print("No Object")
@@ -94,7 +105,7 @@ while True:
         window.FindElement('lay3').update(visible=True)
         window.Refresh()
         loops = 0
-        while loops < 600:
+        while (float(loops) * 0.05) < int(values[0]):
             i=GPIO.input(24)
             if i==1:                 #When output from motion sensor is LOW
                 print("No Object")
@@ -105,18 +116,18 @@ while True:
             loops += 1
     elif event == 'Begin with Beams':
         print(values)
-        mouseid = values[1]
-        backup = values[2]
+        mouseid = values[5]
+        backup = values[6]
         window.FindElement('lay1').update(visible=False)
         window.FindElement('lay2').update(visible=True)
         window.FindElement('lay3').update(visible=False)
         window.Refresh()
         start = 0
         end = 0
-        if values[3]:
+        if values[7]:
             start = 23
             end = 24
-        elif values[4]:
+        elif values[8]:
             start = 24
             end = 23
         trigger = GPIO.input(start)
@@ -135,9 +146,9 @@ while True:
         shutil.copyfile(name, fcopy)
     elif event == 'Begin without Beams':
         print(values)
-        mouseid = values[1]
-        backup = values[2]
-        secs = values[5]
+        mouseid = values[5]
+        backup = values[6]
+        secs = values[9]
         window.FindElement('lay1').update(visible=False)
         window.FindElement('lay2').update(visible=False)
         window.FindElement('lay3').update(visible=False)
