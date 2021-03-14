@@ -91,7 +91,6 @@ cv2.imshow("og", og)
 cv2.imshow("Output", output)
 
 cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 low = 32
 high = 179
