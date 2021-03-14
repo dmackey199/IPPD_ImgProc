@@ -87,8 +87,8 @@ alpha = 1.2;
 beta = 10;
 output = cv2.convertScaleAbs(roi, alpha=alpha, beta=beta)
 
-cv2.imshow("Original", orig)
-cv2.imshow("ROI", output)
+cv2.imshow("Orig", orig)
+cv2.imshow("Output", output)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
