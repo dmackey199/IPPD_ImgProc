@@ -87,6 +87,12 @@ alpha = 1.2;
 beta = 10;
 output = cv2.convertScaleAbs(roi, alpha=alpha, beta=beta)
 
+cv2.imshow("Original", orig)
+cv2.imshow("ROI", output)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
 low = 32
 high = 179
 edges = cv2.Canny(output, low, high)
@@ -122,12 +128,7 @@ calculatedArea = objArea * areaPerPixel
 
 print(calculatedArea)
 
-cv2.imshow("Original", orig)
-cv2.imshow("ROI", roi)
 
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 
 #thresholding
