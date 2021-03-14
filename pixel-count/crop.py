@@ -92,7 +92,7 @@ high = 179
 edges = cv2.Canny(output, low, high)
 
 contours, hierarchy = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-print("Contours found: ", len(contours))
+print "Contours found: ", len(contours)
 if len(contours) <= 1 :
 	print("Unable to detect 2 contours!")
 if len(contours) >= 3 :
@@ -114,6 +114,8 @@ plt.show()
 
 objArea = cv2.contourArea(sorted_cnts[0])
 refArea = cv2.contourArea(sorted_cnts[1])
+print(objArea)
+print(refArea)
 
 areaPerPixel = actualArea / refArea
 calculatedArea = objArea * areaPerPixel
