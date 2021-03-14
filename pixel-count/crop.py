@@ -87,10 +87,10 @@ alpha = 1.2;
 beta = 10;
 output = cv2.convertScaleAbs(roi, alpha=alpha, beta=beta)
 
-cv2.imshow("og", og)
-cv2.imshow("Output", output)
+# cv2.imshow("og", og)
+# cv2.imshow("Output", output)
 
-cv2.waitKey(0)
+# cv2.waitKey(0)
 
 low = 32
 high = 179
