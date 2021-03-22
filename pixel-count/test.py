@@ -28,7 +28,7 @@ def click_and_crop(event, x, y, flags, param):
             x2 = max(initCrop[0][0], initCrop[1][0])
             y1 = min(initCrop[0][1], initCrop[1][1])
             y2 = max(initCrop[0][1], initCrop[1][1])
-            initCrop = [(x1,y1)]
+            refPt = [(x1,y1)]
             refPt.append((x2, y2))
 		# draw a rectangle around the region of interest
             cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
