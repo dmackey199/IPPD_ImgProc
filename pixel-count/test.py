@@ -82,7 +82,7 @@ contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPR
 chosen_contours = []
 for i in range(len(contours)):
     area = cv2.contourArea(contours[i])
-    if(area > 100 and area < 600):
+    if(area > 100 and area < 2000):
         chosen_contours.append(contours[i])
         print(area)
         x1,y1,w1,h1 = cv2.boundingRect(contours[i])
