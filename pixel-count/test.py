@@ -4,25 +4,34 @@ import argparse
 # import matplotlib.pyplot as plt
 
 refPt = []
-cropping = False
+initCrop = []
 roi = cv2.imread("img1.png",0)
+# x1, y1
+
+
+#                             x2,y2
 def click_and_crop(event, x, y, flags, param):
 	# grab references to the global variables
-	global refPt, cropping, roi
+	global refPt, initCrop, roi
 	# if the left mouse button was clicked, record the starting
 	# (x, y) coordinates and indicate that cropping is being
 	# performed
 	if event == cv2.EVENT_LBUTTONDOWN:
-		refPt = [(x, y)]
-		cropping = True
+        initCrop = [(x,y)]
+		# refPt = [(x, y)]
 	# check to see if the left mouse button was released
 	elif event == cv2.EVENT_LBUTTONUP:
 		# record the ending (x, y) coordinates and indicate that
 		# the cropping operation is finished
-		refPt.append((x, y))
-		cropping = False
+        initCrop.append((x,y))
+        x1 = min(initCrop[0][0], initCrop[1][0])
+        x2 = max(initCrop[0][0], initCrop[1][0])
+        y1 = min(initCrop[0][1], initCrop[1][1])
+        y2 = max(initCrop[0][1], initCrop[1][1])
+        refPt.append((x1, y1))
+        refPt.append((x2, y2))
 		# draw a rectangle around the region of interest
-		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
+	    cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
 
 def sort_contours(cnts, method="left-to-right"):
 	# initialize the reverse flag and sort index
