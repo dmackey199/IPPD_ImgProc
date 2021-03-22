@@ -77,7 +77,8 @@ while(1):
     if k == ord("c"):
         break
 
-contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+# contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 for i in range(len(contours)):
     if(cv2.contourArea(contours[i]) < 100):
