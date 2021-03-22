@@ -24,14 +24,14 @@ def click_and_crop(event, x, y, flags, param):
 		# record the ending (x, y) coordinates and indicate that
 		# the cropping operation is finished
             initCrop.append((x,y))
-        x1 = min(initCrop[0][0], initCrop[1][0])
-        x2 = max(initCrop[0][0], initCrop[1][0])
-        y1 = min(initCrop[0][1], initCrop[1][1])
-        y2 = max(initCrop[0][1], initCrop[1][1])
-        refPt.append((x1, y1))
-        refPt.append((x2, y2))
+            x1 = min(initCrop[0][0], initCrop[1][0])
+            x2 = max(initCrop[0][0], initCrop[1][0])
+            y1 = min(initCrop[0][1], initCrop[1][1])
+            y2 = max(initCrop[0][1], initCrop[1][1])
+            initCrop = [(x1,y1)]
+            refPt.append((x2, y2))
 		# draw a rectangle around the region of interest
-        cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
+            cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
 
 def sort_contours(cnts, method="left-to-right"):
 	# initialize the reverse flag and sort index
