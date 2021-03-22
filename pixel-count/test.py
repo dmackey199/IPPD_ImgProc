@@ -109,7 +109,7 @@ for i in range(len(contours)):
         cv2.putText(rect, str(i), (x1, y1+h1+5), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 cv2.namedWindow('Contours')
-sorted_contours = sort_contours(chosen_contours, "top-to-bottom")
+sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 image = cv2.drawContours(roi, sorted_contours, -1, (0, 127, 0), 2)
 # show the image with the drawn contours
 while(1):
