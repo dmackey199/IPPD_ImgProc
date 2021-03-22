@@ -105,7 +105,7 @@ for i in range(len(contours)):
         chosen_contours.append(contours[i])
         print(area)
         x1,y1,w1,h1 = cv2.boundingRect(contours[i])
-        rect = cv2.rectangle(img, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
+        rect = cv2.rectangle(roi, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
         cv2.putText(rect, "EEYYYYYYEEEE", (x1, y1+h1+5), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 cv2.namedWindow('Contours')
