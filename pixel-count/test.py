@@ -51,7 +51,7 @@ if len(refPt) == 2:
     if k == ord("c"):
 		break
 
-
+cv2.destroyAllWindows()
 
 cv2.namedWindow('image')
 cv2.createTrackbar('min','image',0,255,nothing)
