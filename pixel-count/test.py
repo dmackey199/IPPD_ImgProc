@@ -81,7 +81,7 @@ while(1):
 contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 chosen_contours = []
 for i in range(len(contours)):
-    if(cv2.contourArea(contours[i]) < 100):
+    if(cv2.contourArea(contours[i]) > 100):
         chosen_contours.append(contours[i])
         x1,y1,w1,h1 = cv2.boundingRect(contours[i])
         rect = cv2.rectangle(img, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
