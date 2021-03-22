@@ -24,7 +24,26 @@ def click_and_crop(event, x, y, flags, param):
 		# draw a rectangle around the region of interest
 		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
 
+def sort_contours(cnts, method="left-to-right"):
+	# initialize the reverse flag and sort index
+	reverse = False
+	i = 0
+	# handle if we need to sort in reverse
+	if method == "right-to-left" or method == "bottom-to-top":
+		reverse = True
+	# handle if we are sorting against the y-coordinate rather than
+	# the x-coordinate of the bounding box
+	if method == "top-to-bottom" or method == "bottom-to-top":
+		i = 1
+	# construct the list of bounding boxes and sort them from top to
+	# bottom
+	boundingBoxes = [cv2.boundingRect(c) for c in cnts]
+	(cnts, boundingBoxes) = zip(*sorted(zip(cnts, boundingBoxes),
+		key=lambda b:b[1][i], reverse=reverse))
+	# return the list of sorted contours and bounding boxes
+	return (cnts, boundingBoxes)
 
+#START
 img = cv2.imread("img1.png",0)
 clone = img.copy()
 
@@ -90,7 +109,8 @@ for i in range(len(contours)):
         cv2.putText(rect, str(i), (x1, y1+h1+5), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 cv2.namedWindow('Contours')
-image = cv2.drawContours(roi, chosen_contours, -1, (0, 127, 0), 2)
+sorted_contours = sort_contours(chosen_contours, "top-to-bottom")
+image = cv2.drawContours(roi, sorted_contours, -1, (0, 127, 0), 2)
 # show the image with the drawn contours
 while(1):
     cv2.imshow("Contours",image)
@@ -98,6 +118,6 @@ while(1):
     if k == ord("c"):
         break
 
-print("Contours found: ", len(chosen_contours))
+print("Contours found: ", len(sorted_contours))
 
 cv2.destroyAllWindows()
