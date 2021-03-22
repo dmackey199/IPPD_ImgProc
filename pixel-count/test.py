@@ -87,7 +87,7 @@ for i in range(len(contours)):
         cv2.putText(rect, "Object", (x1, y1+h1+5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (36,255,12), 1)
 
 cv2.namedWindow('Contours')
-image = cv2.drawContours(img, contours, -1, (0, 127, 0), 2)
+image = cv2.drawContours(roi, contours, -1, (0, 127, 0), 2)
 # show the image with the drawn contours
 while(1):
     cv2.imshow("Contours",image)
