@@ -22,7 +22,6 @@ def click_and_crop(event, x, y, flags, param):
 		cropping = False
 		# draw a rectangle around the region of interest
 		cv2.rectangle(roi, refPt[0], refPt[1], (255, 255, 255), 2)
-		cv2.imshow("view crop", roi)
 
 
 img = cv2.imread("img1.png",0)
