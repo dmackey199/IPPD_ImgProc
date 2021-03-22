@@ -31,6 +31,7 @@ clone = img.copy()
 def nothing(x):
   pass
 
+cv2.namedWindow("output")
 cv2.setMouseCallback("output", click_and_crop)
 
 while(1):
