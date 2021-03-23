@@ -128,7 +128,7 @@ while(thresh_val < 120):
     print("Len: ", len(contours))
     for i in range(len(contours)):
         area = cv2.contourArea(contours[i])
-        if(area > 1000 and area < 3000):
+        if(area > 1000 and area < 2000):
             chosen_contours.append(contours[i])
             print("Contour Area: ", area)
     if(len(chosen_contours) != 0): # if good contours were found
