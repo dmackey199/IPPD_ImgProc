@@ -99,7 +99,7 @@ cv2.destroyAllWindows()
 
 cv2.namedWindow('Threshold')
 while(1):
-    ret,thresh=cv2.threshold(roi,50,255,cv2.THRESH_BINARY_INV)
+    ret,thresh=cv2.threshold(roi,90,255,cv2.THRESH_BINARY_INV)
     cv2.imshow("Threshold",thresh)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
