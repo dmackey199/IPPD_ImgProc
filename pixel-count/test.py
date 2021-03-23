@@ -140,7 +140,7 @@ while(thresh_val < 120):
         # cv2.putText(rect, "EYE", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 cv2.namedWindow('Contours')
-sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
+sorted_contours, boundingBoxes = sort_contours(chosen_contours, "bottom-to-top")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
 rect = cv2.rectangle(roi, (x, y), (x + w, y + h), (36,255,12), 1)
