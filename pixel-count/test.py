@@ -129,7 +129,7 @@ while(thresh_val < 120):
         if(area > 1000 and area < 3000):
             chosen_contours.append(contours[i])
             print("Contour Area: ", area)
-            break
+    break
   else:
     thresh_val += 10
     print("New Thresh: ", thresh_val)
