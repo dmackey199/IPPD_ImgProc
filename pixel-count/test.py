@@ -144,7 +144,7 @@ chosen_contours = []
 
 contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 cv2.namedWindow('Contours')
-sorted_contours, boundingBoxes = sort_contours(contours, "top-to-bottom")
+sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 for i in range(len(contours)):
     area = cv2.contourArea(contours[i])
