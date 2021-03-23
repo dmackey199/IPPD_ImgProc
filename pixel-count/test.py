@@ -111,7 +111,7 @@ chosen_contours = []
 
 for i in range(len(contours)):
     area = cv2.contourArea(contours[i])
-    if(area > 2000 and area < 3000):
+    if(area > 100 and area < 3000):
         chosen_contours.append(contours[i])
         print(area)
         # x1,y1,w1,h1 = cv2.boundingRect(contours[i])
