@@ -124,6 +124,8 @@ while(thresh_val < 120):
   thresh = find_thresh(roi, thresh_val)
   contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
   if(len(contours) != 0):
+    print("Curr Thresh: ", thresh_val)
+    print("Len: ", len(contours))
     for i in range(len(contours)):
         area = cv2.contourArea(contours[i])
         if(area > 2000 and area < 3000):
