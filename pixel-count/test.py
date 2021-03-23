@@ -142,7 +142,7 @@ while(thresh_val < 120):
 if(len(chosen_contours) == 0):
   print("No Contours found!")
 cv2.namedWindow('Contours')
-sorted_contours, boundingBoxes = sort_contours(chosen_contours, "bottom-to-top")
+sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
 rect = cv2.rectangle(roi, (x, y), (x + w, y + h), (36,255,12), 1)
