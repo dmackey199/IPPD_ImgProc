@@ -113,7 +113,7 @@ def find_thresh(img, val):
       k = cv2.waitKey(10) & 0xFF
       if k == ord("c"):
           break
-      return thresh
+  return thresh
 
 # contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 # contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
@@ -128,10 +128,11 @@ while(thresh_val < 120):
         area = cv2.contourArea(contours[i])
         if(area > 1000 and area < 3000):
             chosen_contours.append(contours[i])
-            print(area)
+            print("Contour Area: ", area)
             break
   else:
     thresh_val += 10
+    print("New Thresh: ", thresh_val)
         # x1,y1,w1,h1 = cv2.boundingRect(contours[i])
         # rect = cv2.rectangle(roi, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
         # cv2.putText(rect, "EYE", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
