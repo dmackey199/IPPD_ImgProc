@@ -133,7 +133,6 @@ while(thresh_val < 120):
             print("Contour Area: ", area)
     if(len(chosen_contours) != 0): # if good contours were found
       break
-  else:
     thresh_val += 10
     print("New Thresh: ", thresh_val)
         # x1,y1,w1,h1 = cv2.boundingRect(contours[i])
