@@ -128,8 +128,8 @@ cv2.putText(rect, "EYE", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 rect = cv2.rectangle(roi, (5,5), (150,150), (36,255,12), 1)
 cv2.putText(rect, "Reference", (10, y), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
-rect = cv2.rectangle(roi, (x-250,y-50), ((x -150), (y + h)/2), (36,255,12), 1)
-cv2.putText(rect, "Ear", (x-250, (y + h)/2), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
+rect = cv2.rectangle(roi, (x-250,y-50), ((x -150), y + (h/2), (36,255,12), 1)
+cv2.putText(rect, "Ear", (x-250, ((y + h)/2)), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 image = cv2.drawContours(roi, sorted_contours, -1, (0, 127, 0), 2)
 # show the image with the drawn contours
