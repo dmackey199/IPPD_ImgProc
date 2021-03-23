@@ -128,7 +128,7 @@ while(thresh_val < 120):
     print("Len: ", len(contours))
     for i in range(len(contours)):
         area = cv2.contourArea(contours[i])
-        if(area > 2000 and area < 3000):
+        if(area > 1000 and area < 3000):
             chosen_contours.append(contours[i])
             print("Contour Area: ", area)
     if(len(chosen_contours) != 0): # if good contours were found
@@ -139,6 +139,8 @@ while(thresh_val < 120):
         # rect = cv2.rectangle(roi, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
         # cv2.putText(rect, "EYE", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
+if(len(chosen_contours) == 0):
+  print("No Contours found!")
 cv2.namedWindow('Contours')
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "bottom-to-top")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
