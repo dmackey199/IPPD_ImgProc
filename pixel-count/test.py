@@ -82,28 +82,28 @@ if len(refPt) == 2:
 
 cv2.destroyAllWindows()
 
-# cv2.namedWindow('image')
-# cv2.createTrackbar('min','image',0,255,nothing)
-# cv2.createTrackbar('max','image',0,255,nothing)
-
-# cv2.namedWindow('Threshold')
-# while(1):
-
-#     a = cv2.getTrackbarPos('min','image')
-#     b = cv2.getTrackbarPos('max','image')
-#     ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
-#     cv2.imshow("Threshold",thresh)
-#     k = cv2.waitKey(10) & 0xFF
-#     if k == ord("c"):
-# 		break
+cv2.namedWindow('image')
+cv2.createTrackbar('min','image',0,255,nothing)
+cv2.createTrackbar('max','image',0,255,nothing)
 
 cv2.namedWindow('Threshold')
 while(1):
-    ret,thresh=cv2.threshold(roi,70,255,cv2.THRESH_BINARY_INV)
+
+    a = cv2.getTrackbarPos('min','image')
+    b = cv2.getTrackbarPos('max','image')
+    ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
     cv2.imshow("Threshold",thresh)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
-        break
+		break
+
+# cv2.namedWindow('Threshold')
+# while(1):
+#     ret,thresh=cv2.threshold(roi,70,255,cv2.THRESH_BINARY_INV)
+#     cv2.imshow("Threshold",thresh)
+#     k = cv2.waitKey(10) & 0xFF
+#     if k == ord("c"):
+#         break
 
 # contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
 contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
