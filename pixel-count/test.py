@@ -5,7 +5,7 @@ import argparse
 
 refPt = []
 initCrop = []
-roi = cv2.imread("img2.png",0)
+roi = cv2.imread("img1.png",0)
 # x1, y1
 
 
@@ -53,7 +53,7 @@ def sort_contours(cnts, method="left-to-right"):
 	return (cnts, boundingBoxes)
 
 #START
-img = cv2.imread("img2.png",0)
+img = cv2.imread("img1.png",0)
 clone = img.copy()
 
 def nothing(x):
@@ -97,53 +97,61 @@ cv2.destroyAllWindows()
 #     if k == ord("c"):
 # 		break
 
-  # cv2.namedWindow('Threshold')
-  # while(1):
-  #     ret,thresh=cv2.threshold(roi,70,255,cv2.THRESH_BINARY_INV)
-  #     cv2.imshow("Threshold",thresh)
-  #     k = cv2.waitKey(10) & 0xFF
-  #     if k == ord("c"):
-  #         break
+cv2.namedWindow('Threshold')
+while(1):
+    ret,thresh=cv2.threshold(roi,70,255,cv2.THRESH_BINARY_INV)
+    cv2.imshow("Threshold",thresh)
+    k = cv2.waitKey(10) & 0xFF
+    if k == ord("c"):
+        break
 
-def find_thresh(img, val):
-  cv2.namedWindow('Threshold')
-  while(1):
-      ret,thresh=cv2.threshold(img,val,255,cv2.THRESH_BINARY_INV)
-      cv2.imshow("Threshold",thresh)
-      k = cv2.waitKey(10) & 0xFF
-      if k == ord("c"):
-          break
-  return thresh
+# def find_thresh(img, val):
+#   cv2.namedWindow('Threshold')
+#   while(1):
+#       ret,thresh=cv2.threshold(img,val,255,cv2.THRESH_BINARY_INV)
+#       cv2.imshow("Threshold",thresh)
+#       k = cv2.waitKey(10) & 0xFF
+#       if k == ord("c"):
+#           break
+#   return thresh
 
 # contours, hierarchy = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
-# contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
 chosen_contours = []
-thresh = None
-thresh_val = 70
-while(thresh_val < 120):
-  thresh = find_thresh(roi, thresh_val)
-  contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-  if(len(contours) != 0):
-    print("Curr Thresh: ", thresh_val)
-    print("Len: ", len(contours))
-    for i in range(len(contours)):
-        area = cv2.contourArea(contours[i])
-        if(area > 1000 and area < 2000):
-            chosen_contours.append(contours[i])
-            print("Contour Area: ", area)
-    if(len(chosen_contours) != 0): # if good contours were found
-      break
-    thresh_val += 10
-    print("New Thresh: ", thresh_val)
+# thresh = None
+# thresh_val = 70
+# while(thresh_val < 120):
+#   thresh = find_thresh(roi, thresh_val)
+#   contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+#   if(len(contours) != 0):
+#     print("Curr Thresh: ", thresh_val)
+#     print("Len: ", len(contours))
+#     for i in range(len(contours)):
+#         area = cv2.contourArea(contours[i])
+#         if(area > 1000 and area < 2000):
+#             chosen_contours.append(contours[i])
+#             print("Contour Area: ", area)
+#     if(len(chosen_contours) != 0): # if good contours were found
+#       break
+#     thresh_val += 10
+#     print("New Thresh: ", thresh_val)
         # x1,y1,w1,h1 = cv2.boundingRect(contours[i])
         # rect = cv2.rectangle(roi, (x1, y1), (x1 + w1, y1 + h1), (36,255,12), 1)
         # cv2.putText(rect, "EYE", (x1, y1-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
-if(len(chosen_contours) == 0):
-  print("No Contours found!")
+# if(len(chosen_contours) == 0):
+#   print("No Contours found!")
+
+contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 cv2.namedWindow('Contours')
-sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
+sorted_contours, boundingBoxes = sort_contours(contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
+for i in range(len(contours)):
+    area = cv2.contourArea(contours[i])
+    if(area > 1000 and area < 2000):
+        chosen_contours.append(contours[i])
+# sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
+# x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
 rect = cv2.rectangle(roi, (x, y), (x + w, y + h), (36,255,12), 1)
 cv2.putText(rect, "EYE", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
