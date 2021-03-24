@@ -19,6 +19,9 @@ GPIO.setup(23, GPIO.IN, GPIO.PUD_UP)
 GPIO.setup(24, GPIO.IN, GPIO.PUD_UP)
 
 camera = PiCamera()
+camera.framerate = 90
+camera.resolution = (960,720)
+camera.exposure_mode = 'sports'
 
 mouseid = ""
 backup = ""
@@ -30,7 +33,7 @@ sg.theme('BlueMono')   # Add a touch of color
 test_frame = [ [sg.Text('Here you can test the focus of the Camera and the IR Beams!', font=("Helvetica",12))],
                [sg.Text('If you are testing the IR Beams, please select "execute in terminal" upon start.', font=("Helvetica",12))],
             [sg.Text('Test time (in seconds):', font=("Helvetica",12)), sg.InputText(testsec)],
-            [sg.Text('Camera Frame Rate:', font=("Helvetica",12)), sg.Radio('90', "fr", default=True, font=("Helvetica",12)), sg.Radio('60', "fr", font=("Helvetica",12)), sg.Radio('30', "fr", font=("Helvetica",12))],
+            #[sg.Text('Camera Frame Rate:', font=("Helvetica",12)), sg.Radio('90', "fr", default=True, font=("Helvetica",12)), sg.Radio('60', "fr", font=("Helvetica",12)), sg.Radio('30', "fr", font=("Helvetica",12))],
              [sg.Button('Preview Camera', font=("Helvetica",12)), sg.Button('Test Left IR Beam', font=("Helvetica",12)), sg.Button('Test Right IR Beam', font=("Helvetica",12))] ]
 
 data_frame = [ [sg.Text('Please enter the animal ID, backup location, and direction.', font=("Helvetica",12))],
@@ -67,15 +70,6 @@ while True:
     window.Refresh()
     event, values = window.Read()
     print(values)
-    if values[1]:
-        camera.resolution = (640,480) #90fps
-        camera.framerate = 90
-    elif values[2]:
-        camera.resolution = (1280,720) #60fps
-        camera.framerate = 60
-    else:
-        camera.resolution = (1920,1080) #30fps
-        camera.framerate = 30
     if event == sg.WIN_CLOSED:   # if user closes window or clicks cancel
         window.close()
         camera.close()
@@ -116,18 +110,18 @@ while True:
             loops += 1
     elif event == 'Begin with Beams':
         print(values)
-        mouseid = values[5]
-        backup = values[6]
+        mouseid = values[2]
+        backup = values[3]
         window.FindElement('lay1').update(visible=False)
         window.FindElement('lay2').update(visible=True)
         window.FindElement('lay3').update(visible=False)
         window.Refresh()
         start = 0
         end = 0
-        if values[7]:
+        if values[4]:
             start = 23
             end = 24
-        elif values[8]:
+        elif values[5]:
             start = 24
             end = 23
         trigger = GPIO.input(start)
@@ -136,19 +130,20 @@ while True:
         now = datetime.now().strftime("H%H-M%M-S%S")
         name = "id-" + str(mouseid) + "-" + now + ".h264"
         camera.start_preview()
-        camera.start_recording(name, format='h264')
+        camera.start_recording(name, format='h264', level='4.2')
         trigger = GPIO.input(end)
         while trigger == 1:
             trigger = GPIO.input(end)
+        time.sleep(2)
         camera.stop_recording()
         camera.stop_preview()
         fcopy = backup + "/" + name
         shutil.copyfile(name, fcopy)
     elif event == 'Begin without Beams':
         print(values)
-        mouseid = values[5]
-        backup = values[6]
-        secs = values[9]
+        mouseid = values[2]
+        backup = values[3]
+        secs = values[6]
         window.FindElement('lay1').update(visible=False)
         window.FindElement('lay2').update(visible=False)
         window.FindElement('lay3').update(visible=False)
@@ -156,7 +151,7 @@ while True:
         now = datetime.now().strftime("H%H-M%M-S%S")
         name = "id-" + str(mouseid) + "-" + now + ".h264"
         camera.start_preview()
-        camera.start_recording(name, format='h264')
+        camera.start_recording(name, format='h264', level='4.2')
         time.sleep(int(secs))
         camera.stop_recording()
         camera.stop_preview()
