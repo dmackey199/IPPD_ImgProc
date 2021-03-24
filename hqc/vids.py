@@ -16,14 +16,9 @@ now = datetime.now().strftime("H%H-M%M-S%S")
 name = now + "-" + args["lens"] + "mm-" + str(args["fr"]) + "fps" + ".h264"
 
 camera = picamera.PiCamera()
-if args["fr"] <= 30:
-    camera.resolution = (1920,1080) #30fps
-elif args["fr"] <= 60:
-    camera.resolution = (1280,720) #60fps
-else:
-    camera.resolution = (640,480) #90fps
-    
-camera.framerate = args["fr"]
+camera.framerate = 90
+camera.resolution = (960,720)
+camera.exposure_mode = 'sports'
 
 camera.start_preview()
 camera.start_recording(name, format='h264')
