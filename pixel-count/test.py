@@ -205,7 +205,7 @@ while(1):
     # a = cv2.getTrackbarPos('min','ear')
     # b = cv2.getTrackbarPos('max','ear')
     # ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
-    
+
     ret,thresh=cv2.threshold(earPic,230,255,cv2.THRESH_BINARY_INV)
     cv2.imshow("EarThreshold",thresh)
     k = cv2.waitKey(10) & 0xFF
@@ -223,15 +223,15 @@ while(1):
 cv2.destroyAllWindows()
 
 earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-earPixelArea = None
+
 for i in range(len(earContours)):
     area = cv2.contourArea(earContours[i])
     if(area > 150):
         earContours = earContours[i]
-        earPixelArea = area
         break
+earPixelArea = cv2.contourArea(earContours)
 print("Eye Contours found: ", len(earContours))
-print(cv2.contourArea(earContours))
+print("Ear Pixel Area: ", earPixelArea)
 
 earx,eary,earw,earh = cv2.boundingRect(earContours)
 rect = cv2.rectangle(earPic, (earx, eary), (earx + earw, eary + earh), (36,255,12), 1)
