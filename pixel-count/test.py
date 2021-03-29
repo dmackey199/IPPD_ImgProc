@@ -176,10 +176,12 @@ while(1):
     if k == ord("c"):
         break
 
-print("Contours found: ", len(sorted_contours))
+#print("Contours found: ", len(sorted_contours))
 
-eyePic = clone[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
-refPic = clone[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
+eyePic = roi[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
+refPic = roi[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
+
+
 
 cv2.namedWindow('eye')
 while(1):
