@@ -232,6 +232,7 @@ for i in range(len(earContours)):
         earPixelArea = area
         break
 print("Eye Contours found: ", len(earContours))
+print(cv2.contourArea(earContours))
 
 earx,eary,earw,earh = cv2.boundingRect(earContours)
 rect = cv2.rectangle(earPic, (earx, eary), (earx + earw, eary + earh), (36,255,12), 1)
@@ -245,7 +246,7 @@ while(1):
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
         break
-
+cv2.destroyAllWindows()
 # cv2.namedWindow('refHole')
 # while(1):
 #   cv2.imshow("ear",refPic)
