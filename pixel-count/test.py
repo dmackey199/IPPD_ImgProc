@@ -228,7 +228,7 @@ eyePixelArea = None
 for i in range(len(eyeContours)):
     area = cv2.contourArea(eyeContours[i])
     if(area > 50):
-        eyeContours = refContours[i]
+        eyeContours = eyeContours[i]
         eyePixelArea = area
         break
 print("Eye Contours found: ", len(eyeContours))
