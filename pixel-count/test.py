@@ -223,15 +223,29 @@ while(1):
 
 cv2.destroyAllWindows()
 
-eyeContours, eyeHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-eyePixelArea = None
-for i in range(len(eyeContours)):
-    area = cv2.contourArea(eyeContours[i])
-    if(area > 50):
-        eyeContours = eyeContours[i]
-        eyePixelArea = area
+earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+earPixelArea = None
+for i in range(len(earContours)):
+    area = cv2.contourArea(earContours[i])
+    if(area > 150):
+        earContours = earContours[i]
+        earPixelArea = area
         break
-print("Eye Contours found: ", len(eyeContours))
+print("Eye Contours found: ", len(earContours))
+
+earx,eary,earw,earh = cv2.boundingRect(earContours)
+rect = cv2.rectangle(earPic, (earx, eary), (earx + earw, eary + earh), (36,255,12), 1)
+cv2.putText(rect, "REF", (earx, eary+earh+25), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
+newEarPic = cv2.drawContours(earPic, earContours, -1, (0, 127, 0), 2)
+
+cv2.namedWindow('EarContours')
+# show the image with the drawn contours
+while(1):
+    cv2.imshow("EarContours",newEarPic)
+    k = cv2.waitKey(10) & 0xFF
+    if k == ord("c"):
+        break
+
 # cv2.namedWindow('refHole')
 # while(1):
 #   cv2.imshow("ear",refPic)
@@ -262,7 +276,7 @@ for i in range(len(refContours)):
         refContours = refContours[i]
         refPixelArea = area
         break
-print("Contours found: ", len(refContours))
+print("Ref Contours found: ", len(refContours))
 
 refx,refy,refw,refh = cv2.boundingRect(refContours)
 rect = cv2.rectangle(refPic, (refx, refy), (refx + refw, refy + refh), (36,255,12), 1)
