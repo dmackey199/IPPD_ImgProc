@@ -212,18 +212,39 @@ cv2.namedWindow('refHole')
 #   k = cv2.waitKey(10) & 0xFF
 #   if k == ord("c"):
 #     break
-cv2.createTrackbar('min','refHole',0,255,nothing)
-cv2.createTrackbar('max','refHole',0,255,nothing)
+# cv2.createTrackbar('min','refHole',0,255,nothing)
+# cv2.createTrackbar('max','refHole',0,255,nothing)
 
+# cv2.namedWindow('RefThreshold')
+# while(1):
+
+#     a = cv2.getTrackbarPos('min','refHole')
+#     b = cv2.getTrackbarPos('max','refHole')
+#     ret,thresh=cv2.threshold(refPic,a,b,cv2.THRESH_BINARY_INV)
+#     cv2.imshow("RefThreshold",thresh)
+#     k = cv2.waitKey(10) & 0xFF
+#     if k == ord("c"):
+# 		  break
 cv2.namedWindow('RefThreshold')
-while(1):
+ret,refThresh=cv2.threshold(refPic,167,255,cv2.THRESH_BINARY_INV)
+refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-    a = cv2.getTrackbarPos('min','refHole')
-    b = cv2.getTrackbarPos('max','refHole')
-    ret,thresh=cv2.threshold(refPic,a,b,cv2.THRESH_BINARY_INV)
-    cv2.imshow("RefThreshold",thresh)
+for i in range(len(refContours)):
+    area = cv2.contourArea(refContours[i])
+    if(area > 100):
+        refContours = refContours[i]
+        break
+
+refx,refy,refw,refh = cv2.boundingRect(refContours)
+rect = cv2.rectangle(refPic, (refx, refy), (refx + refw, refy + refh), (36,255,12), 1)
+cv2.putText(rect, "REF", (refx, refy+refh+10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
+newRefPic = cv2.drawContours(refPic, refContours, -1, (0, 127, 0), 2)
+cv2.namedWindow('RefContours')
+# show the image with the drawn contours
+while(1):
+    cv2.imshow("RefContours",newRefPic)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
-		  break
+        break
 
 cv2.destroyAllWindows()
