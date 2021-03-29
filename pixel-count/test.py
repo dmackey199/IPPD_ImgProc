@@ -252,21 +252,23 @@ cv2.destroyAllWindows()
 #   k = cv2.waitKey(10) & 0xFF
 #   if k == ord("c"):
 #     break
-# cv2.createTrackbar('min','refHole',0,255,nothing)
-# cv2.createTrackbar('max','refHole',0,255,nothing)
 
+cv2.namedWindow('refHole')
+cv2.createTrackbar('min','refHole',0,255,nothing)
+cv2.createTrackbar('max','refHole',0,255,nothing)
+cv2.namedWindow('RefThreshold')
+refThresh = None
+while(1):
+    a = cv2.getTrackbarPos('min','refHole')
+    b = cv2.getTrackbarPos('max','refHole')
+    ret,thresh=cv2.threshold(refPic,a,b,cv2.THRESH_BINARY_INV)
+    cv2.imshow("RefThreshold",thresh)
+    k = cv2.waitKey(10) & 0xFF
+    if k == ord("c"):
+      refThresh = thresh
+      break
 # cv2.namedWindow('RefThreshold')
-# while(1):
-
-#     a = cv2.getTrackbarPos('min','refHole')
-#     b = cv2.getTrackbarPos('max','refHole')
-#     ret,thresh=cv2.threshold(refPic,a,b,cv2.THRESH_BINARY_INV)
-#     cv2.imshow("RefThreshold",thresh)
-#     k = cv2.waitKey(10) & 0xFF
-#     if k == ord("c"):
-# 		  break
-# cv2.namedWindow('RefThreshold')
-ret,refThresh=cv2.threshold(refPic,167,255,cv2.THRESH_BINARY_INV)
+# ret,refThresh=cv2.threshold(refPic,167,255,cv2.THRESH_BINARY_INV)
 refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 refPixelArea = 0
