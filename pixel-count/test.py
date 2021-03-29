@@ -153,7 +153,7 @@ for i in range(len(contours)):
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
-eyeCrop = [(x,y), (x+w, y+h)]
+earCrop = [(x-250,y-50), (x-170, y + h/2)]
 refCrop = [(5,5), (150,150)]
 
 # sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
@@ -178,27 +178,27 @@ while(1):
 
 #print("Contours found: ", len(sorted_contours))
 
-eyePic = roi[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
+earPic = roi[earCrop[0][1]:earCrop[1][1], earCrop[0][0]:earCrop[1][0]]
 refPic = roi[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 
 
-cv2.namedWindow('eye')
+cv2.namedWindow('ear')
 while(1):
-  cv2.imshow("eye",eyePic)
+  cv2.imshow("ear",earPic)
   k = cv2.waitKey(10) & 0xFF
   if k == ord("c"):
     break
-# cv2.createTrackbar('min','eye',0,255,nothing)
-# cv2.createTrackbar('max','eye',0,255,nothing)
+# cv2.createTrackbar('min','ear',0,255,nothing)
+# cv2.createTrackbar('max','ear',0,255,nothing)
 
-# cv2.namedWindow('EyeThreshold')
+# cv2.namedWindow('EarThreshold')
 # while(1):
 
-#     a = cv2.getTrackbarPos('min','eye')
-#     b = cv2.getTrackbarPos('max','eye')
+#     a = cv2.getTrackbarPos('min','ear')
+#     b = cv2.getTrackbarPos('max','ear')
 #     ret,thresh=cv2.threshold(eyePic,a,b,cv2.THRESH_BINARY_INV)
-#     cv2.imshow("EyeThreshold",thresh)
+#     cv2.imshow("EarThreshold",thresh)
 #     k = cv2.waitKey(10) & 0xFF
 #     if k == ord("c"):
 # 		  break
