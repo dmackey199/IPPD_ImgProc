@@ -7,7 +7,7 @@ import math
 refArea = (2**2) * math.pi
 refPt = []
 initCrop = []
-roi = cv2.imread("img1.png",0)
+roi = cv2.imread("img3.png",0)
 # x1, y1
 
 
@@ -55,7 +55,7 @@ def sort_contours(cnts, method="left-to-right"):
 	return (cnts, boundingBoxes)
 
 #START
-img = cv2.imread("img1.png",0)
+img = cv2.imread("img3.png",0)
 clone = img.copy()
 
 def nothing(x):
