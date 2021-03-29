@@ -281,7 +281,7 @@ for cnt in refCont:
         break
 print("Ref Contours found: ", len(refContours))
 
-refx,refy,refw,refh = cv2.boundingRect(refContours)
+refx,refy,refw,refh = cv2.boundingRect(refContours[0])
 rect = cv2.rectangle(refPic, (refx, refy), (refx + refw, refy + refh), (36,255,12), 1)
 cv2.putText(rect, "REF", (refx, refy+refh+25), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 newRefPic = cv2.drawContours(refPic, refContours, -1, (0, 127, 0), 2)
