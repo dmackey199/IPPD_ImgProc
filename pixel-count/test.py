@@ -148,7 +148,7 @@ contours, hierarchy = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPR
 cv2.namedWindow('Contours')
 for i in range(len(contours)):
     area = cv2.contourArea(contours[i])
-    if(area > 1500 and area < 3000):
+    if(area > 1000 and area < 2000):
         chosen_contours.append(contours[i])
 if(len(chosen_contours) == 0):
   print("No Contours found!")
@@ -156,8 +156,10 @@ sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 print(cv2.contourArea(sorted_contours[0]))
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
-earCrop = [(x-250,y-50), (x-170, y + h/2)]
-refCrop = [(5,5), (150,150)]
+# earCrop = [(x-250,y-50), (x-170, y + h/2)]
+# refCrop = [(5,5), (150,150)]
+earCrop = [(x-180,y-50), (x-120, y + h/2)]
+refCrop = [(5,5), (80,80)]
 
 # sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 # x,y,w,h = cv2.boundingRect(sorted_contours[0])
@@ -168,7 +170,7 @@ cv2.putText(rect, "EYE", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 rect = cv2.rectangle(roi, (5,5), (80,80), (36,255,12), 1)
 cv2.putText(rect, "Reference", (10, y+50), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
-rect = cv2.rectangle(roi, (x-120,y-50), ((x -80), y + (h/2)), (36,255,12), 1)
+rect = cv2.rectangle(roi, (x-180,y-50), ((x -120), y + (h/2)), (36,255,12), 1)
 cv2.putText(rect, "Ear", (x-250, y + h), cv2.FONT_HERSHEY_SIMPLEX, 1, (36,255,12), 1)
 
 image = cv2.drawContours(roi, sorted_contours, -1, (0, 127, 0), 2)
