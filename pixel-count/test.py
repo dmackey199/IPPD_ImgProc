@@ -206,7 +206,7 @@ while(1):
 cv2.destroyAllWindows()
 
 
-cv2.namedWindow('refHole')
+# cv2.namedWindow('refHole')
 # while(1):
 #   cv2.imshow("ear",refPic)
 #   k = cv2.waitKey(10) & 0xFF
@@ -225,7 +225,7 @@ cv2.namedWindow('refHole')
 #     k = cv2.waitKey(10) & 0xFF
 #     if k == ord("c"):
 # 		  break
-cv2.namedWindow('RefThreshold')
+# cv2.namedWindow('RefThreshold')
 ret,refThresh=cv2.threshold(refPic,167,255,cv2.THRESH_BINARY_INV)
 refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
@@ -234,6 +234,7 @@ for i in range(len(refContours)):
     if(area > 100):
         refContours = refContours[i]
         break
+print("Contours found: ", len(refContours))
 
 refx,refy,refw,refh = cv2.boundingRect(refContours)
 rect = cv2.rectangle(refPic, (refx, refy), (refx + refw, refy + refh), (36,255,12), 1)
