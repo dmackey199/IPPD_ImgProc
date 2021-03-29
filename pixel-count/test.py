@@ -188,8 +188,8 @@ cv2.createTrackbar('max','image',0,255,nothing)
 cv2.namedWindow('Threshold')
 while(1):
 
-    a = cv2.getTrackbarPos('min','image')
-    b = cv2.getTrackbarPos('max','image')
+    a = cv2.getTrackbarPos('min','eye')
+    b = cv2.getTrackbarPos('max','eye')
     ret,thresh=cv2.threshold(eyePic,a,b,cv2.THRESH_BINARY_INV)
     cv2.imshow("Threshold",thresh)
     k = cv2.waitKey(10) & 0xFF
