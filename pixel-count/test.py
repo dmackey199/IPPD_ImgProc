@@ -84,16 +84,16 @@ if len(refPt) == 2:
 
 cv2.destroyAllWindows()
 
-cv2.namedWindow('image')
-cv2.createTrackbar('min','image',0,255,nothing)
-cv2.createTrackbar('max','image',0,255,nothing)
+# cv2.namedWindow('image')
+# cv2.createTrackbar('min','image',0,255,nothing)
+# cv2.createTrackbar('max','image',0,255,nothing)
 
 cv2.namedWindow('Threshold')
 while(1):
-
-    a = cv2.getTrackbarPos('min','image')
-    b = cv2.getTrackbarPos('max','image')
-    ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
+    # a = cv2.getTrackbarPos('min','image')
+    # b = cv2.getTrackbarPos('max','image')
+    # ret,thresh=cv2.threshold(roi,a,b,cv2.THRESH_BINARY_INV)
+    ret,thresh=cv2.threshold(roi,125,230,cv2.THRESH_BINARY_INV)
     cv2.imshow("Threshold",thresh)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
@@ -151,7 +151,7 @@ for i in range(len(contours)):
     if(area > 1000 and area < 2000):
         chosen_contours.append(contours[i])
 if(len(chosen_contours) == 0):
-  print("No Contours found!")
+  print("No Eye Contours found!")
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 print(cv2.contourArea(sorted_contours[0]))
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
@@ -188,26 +188,26 @@ refPic = roi[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 
 
-cv2.namedWindow('ear')
+# cv2.namedWindow('ear')
 # while(1):
 #   cv2.imshow("ear",earPic)
 #   k = cv2.waitKey(10) & 0xFF
 #   if k == ord("c"):
 #     break
 
-cv2.createTrackbar('min','ear',0,255,nothing)
-cv2.createTrackbar('max','ear',0,255,nothing)
+# cv2.namedWindow('ear')
+# cv2.createTrackbar('min','ear',0,255,nothing)
+# cv2.createTrackbar('max','ear',0,255,nothing)
 
 cv2.namedWindow('EarThreshold')
 invert = None
 while(1):
-
-    a = cv2.getTrackbarPos('min','ear')
-    b = cv2.getTrackbarPos('max','ear')
-    ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
+    # a = cv2.getTrackbarPos('min','ear')
+    # b = cv2.getTrackbarPos('max','ear')
+    # ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
+    
+    ret,thresh=cv2.threshold(earPic,230,255,cv2.THRESH_BINARY_INV)
     cv2.imshow("EarThreshold",thresh)
-    # edges=cv2.Canny(earPic,a,b)
-    # cv2.imshow("EarThreshold",edges)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
       invert = cv2.bitwise_not(thresh)
@@ -215,7 +215,6 @@ while(1):
 
 cv2.namedWindow('Invert')
 while(1):
-
   cv2.imshow("Invert",invert)
   k = cv2.waitKey(10) & 0xFF
   if k == ord("c"):
