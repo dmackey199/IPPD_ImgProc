@@ -199,6 +199,7 @@ cv2.createTrackbar('min','ear',0,255,nothing)
 cv2.createTrackbar('max','ear',0,255,nothing)
 
 cv2.namedWindow('EarThreshold')
+invert = None
 while(1):
 
     a = cv2.getTrackbarPos('min','ear')
@@ -209,7 +210,16 @@ while(1):
     # cv2.imshow("EarThreshold",edges)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
-		  break
+      invert = cv2.bitwise_not(thresh)
+      break
+
+cv2.namedWindow('Invert')
+while(1):
+
+  cv2.imshow("Invert",invert)
+  k = cv2.waitKey(10) & 0xFF
+  if k == ord("c"):
+    break
 
 cv2.destroyAllWindows()
 
