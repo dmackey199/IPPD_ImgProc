@@ -150,6 +150,8 @@ for i in range(len(contours)):
     area = cv2.contourArea(contours[i])
     if(area > 1500 and area < 3000):
         chosen_contours.append(contours[i])
+if(len(chosen_contours) == 0):
+  print("No Contours found!")
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
