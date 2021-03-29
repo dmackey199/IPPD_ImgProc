@@ -200,7 +200,7 @@ while(1):
     b = cv2.getTrackbarPos('max','ear')
     # ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
     # cv2.imshow("EarThreshold",thresh)
-    edges=cv2.threshold(earPic,a,b)
+    edges=cv2.Canny(earPic,a,b)
     cv2.imshow("EarThreshold",edges)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
