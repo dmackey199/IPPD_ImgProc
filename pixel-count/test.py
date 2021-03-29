@@ -230,7 +230,7 @@ for i in range(len(earContours)):
         earContours = earContours[i]
         break
 earPixelArea = cv2.contourArea(earContours)
-print("Eye Contours found: ", len(earContours))
+#print("Eye Contours found: ", len(earContours))
 print("Ear Pixel Area: ", earPixelArea)
 
 earx,eary,earw,earh = cv2.boundingRect(earContours)
@@ -272,7 +272,7 @@ refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.C
 refPixelArea = 0
 for i in range(len(refContours)):
     area = cv2.contourArea(refContours[i])
-    if(area > 100):
+    if(area > 300):
         refContours = refContours[i]
         refPixelArea = area
         break
