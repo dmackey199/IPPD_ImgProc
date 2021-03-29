@@ -274,7 +274,7 @@ refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.C
 refPixelArea = 0
 for i in range(len(refContours)):
     area = cv2.contourArea(refContours[i])
-    if(area > 300):
+    if(200 < area < 2000):
         refContours = refContours[i]
         refPixelArea = area
         break
