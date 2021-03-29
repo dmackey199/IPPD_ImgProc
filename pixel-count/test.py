@@ -1,8 +1,10 @@
 import numpy as np
 import cv2
 import argparse
-# import matplotlib.pyplot as plt
+import math
 
+#4mm hole has radius of 2, Area = pi * r^2
+refArea = (2**2) * math.pi
 refPt = []
 initCrop = []
 roi = cv2.imread("img1.png",0)
@@ -151,6 +153,9 @@ for i in range(len(contours)):
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
+eyeCrop = [(x,y), (x+w, y+h)]
+refCrop = [(5,5), (150,150)]
+
 # sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
 # x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
@@ -172,5 +177,23 @@ while(1):
         break
 
 print("Contours found: ", len(sorted_contours))
+
+eyePic = clone[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
+refPic = clone[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
+
+cv2.namedWindow('eye')
+cv2.createTrackbar('min','image',0,255,nothing)
+cv2.createTrackbar('max','image',0,255,nothing)
+
+cv2.namedWindow('Threshold')
+while(1):
+
+    a = cv2.getTrackbarPos('min','image')
+    b = cv2.getTrackbarPos('max','image')
+    ret,thresh=cv2.threshold(eyePic,a,b,cv2.THRESH_BINARY_INV)
+    cv2.imshow("Threshold",thresh)
+    k = cv2.waitKey(10) & 0xFF
+    if k == ord("c"):
+		  break
 
 cv2.destroyAllWindows()
