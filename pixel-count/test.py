@@ -182,18 +182,23 @@ eyePic = clone[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
 refPic = clone[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 cv2.namedWindow('eye')
-cv2.createTrackbar('min','eye',0,255,nothing)
-cv2.createTrackbar('max','eye',0,255,nothing)
-
-cv2.namedWindow('EyeThreshold')
 while(1):
+  cv2.imshow("eye",eyePic)
+  k = cv2.waitKey(10) & 0xFF
+  if k == ord("c"):
+    break
+# cv2.createTrackbar('min','eye',0,255,nothing)
+# cv2.createTrackbar('max','eye',0,255,nothing)
 
-    a = cv2.getTrackbarPos('min','eye')
-    b = cv2.getTrackbarPos('max','eye')
-    ret,thresh=cv2.threshold(eyePic,a,b,cv2.THRESH_BINARY_INV)
-    cv2.imshow("EyeThreshold",thresh)
-    k = cv2.waitKey(10) & 0xFF
-    if k == ord("c"):
-		  break
+# cv2.namedWindow('EyeThreshold')
+# while(1):
+
+#     a = cv2.getTrackbarPos('min','eye')
+#     b = cv2.getTrackbarPos('max','eye')
+#     ret,thresh=cv2.threshold(eyePic,a,b,cv2.THRESH_BINARY_INV)
+#     cv2.imshow("EyeThreshold",thresh)
+#     k = cv2.waitKey(10) & 0xFF
+#     if k == ord("c"):
+# 		  break
 
 cv2.destroyAllWindows()
