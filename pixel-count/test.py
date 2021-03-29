@@ -182,8 +182,8 @@ eyePic = clone[eyeCrop[0][1]:eyeCrop[1][1], eyeCrop[0][0]:eyeCrop[1][0]]
 refPic = clone[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 cv2.namedWindow('eye')
-cv2.createTrackbar('min','image',0,255,nothing)
-cv2.createTrackbar('max','image',0,255,nothing)
+cv2.createTrackbar('min','eye',0,255,nothing)
+cv2.createTrackbar('max','eye',0,255,nothing)
 
 cv2.namedWindow('EyeThreshold')
 while(1):
