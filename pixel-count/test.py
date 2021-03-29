@@ -183,7 +183,7 @@ refPic = roi[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 
 
-# cv2.namedWindow('ear')
+cv2.namedWindow('ear')
 # while(1):
 #   cv2.imshow("ear",earPic)
 #   k = cv2.waitKey(10) & 0xFF
