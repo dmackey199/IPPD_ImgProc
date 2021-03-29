@@ -184,24 +184,24 @@ refPic = roi[refCrop[0][1]:refCrop[1][1], refCrop[0][0]:refCrop[1][0]]
 
 
 cv2.namedWindow('ear')
-# while(1):
-#   cv2.imshow("ear",refPic)
-#   k = cv2.waitKey(10) & 0xFF
-#   if k == ord("c"):
-#     break
-cv2.createTrackbar('min','ear',0,255,nothing)
-cv2.createTrackbar('max','ear',0,255,nothing)
-
-cv2.namedWindow('EarThreshold')
 while(1):
+  cv2.imshow("ear",refPic)
+  k = cv2.waitKey(10) & 0xFF
+  if k == ord("c"):
+    break
+# cv2.createTrackbar('min','ear',0,255,nothing)
+# cv2.createTrackbar('max','ear',0,255,nothing)
 
-    a = cv2.getTrackbarPos('min','ear')
-    b = cv2.getTrackbarPos('max','ear')
-    ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
-    cv2.imshow("EarThreshold",thresh)
-    k = cv2.waitKey(10) & 0xFF
-    if k == ord("c"):
-		  break
+# cv2.namedWindow('EarThreshold')
+# while(1):
+
+#     a = cv2.getTrackbarPos('min','ear')
+#     b = cv2.getTrackbarPos('max','ear')
+#     ret,thresh=cv2.threshold(earPic,a,b,cv2.THRESH_BINARY_INV)
+#     cv2.imshow("EarThreshold",thresh)
+#     k = cv2.waitKey(10) & 0xFF
+#     if k == ord("c"):
+# 		  break
 
 cv2.destroyAllWindows()
 
