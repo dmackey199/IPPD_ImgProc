@@ -223,7 +223,15 @@ while(1):
 
 cv2.destroyAllWindows()
 
-
+eyeContours, eyeHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+eyePixelArea = None
+for i in range(len(eyeContours)):
+    area = cv2.contourArea(eyeContours[i])
+    if(area > 50):
+        eyeContours = refContours[i]
+        eyePixelArea = area
+        break
+print("Eye Contours found: ", len(eyeContours))
 # cv2.namedWindow('refHole')
 # while(1):
 #   cv2.imshow("ear",refPic)
