@@ -269,13 +269,14 @@ while(1):
       break
 # cv2.namedWindow('RefThreshold')
 # ret,refThresh=cv2.threshold(refPic,167,255,cv2.THRESH_BINARY_INV)
-refContours, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+refCont, refHierarchy = cv2.findContours(refThresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 refPixelArea = 0
-for i in range(len(refContours)):
-    area = cv2.contourArea(refContours[i])
+refContours = []
+for cnt in refCont:
+    area = cv2.contourArea(cnt)
     if(200 < area < 2000):
-        refContours = refContours[i]
+        refContours.append(cnt)
         refPixelArea = area
         break
 print("Ref Contours found: ", len(refContours))
