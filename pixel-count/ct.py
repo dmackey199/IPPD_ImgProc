@@ -6,11 +6,15 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread("img3.png")
-hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+# img = cv2.imread("img3.png")
+# hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
-hsvImg[...,2] = hsvImg[...,2]*0.4
+# hsvImg[...,2] = hsvImg[...,2]*0.4
 
-plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
-plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-plt.show()
+# plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
+# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
+# plt.show()
+
+white = np.uint8([[[255,255,255 ]]])
+hsv_white = cv2.cvtColor(white,cv2.COLOR_BGR2HSV)
+print(hsv_white)
