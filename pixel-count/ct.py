@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread("img3.png")
+img = cv2.imread("img4.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 hsvImg[...,2] = hsvImg[...,2]*0.4
