@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# img = cv2.imread("img3.png")
+img = cv2.imread("img3.png")
 # hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 # hsvImg[...,2] = hsvImg[...,2]*0.4
@@ -16,6 +16,28 @@ import matplotlib.pyplot as plt
 # plt.show()
 
 # white = np.uint8([[[255,255,255 ]]])
-white = np.uint8([[[0,255,0]]])
-hsv_white = cv2.cvtColor(white,cv2.COLOR_BGR2HSV)
-print(hsv_white)
+# white = np.uint8([[[0,255,0]]])
+# hsv_white = cv2.cvtColor(white,cv2.COLOR_BGR2HSV)
+# print(hsv_white)
+
+# Convert BGR to HSV
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+# define range of blue color in HSV
+lower_blue = np.array([0,50,50])
+upper_blue = np.array([20,255,255])
+
+# Threshold the HSV image to get only blue colors
+mask = cv2.inRange(hsv, lower_blue, upper_blue)
+
+# Bitwise-AND mask and original image
+res = cv2.bitwise_and(hsv,hsv, mask= mask)
+
+cv2.imshow('frame',hsv)
+cv2.imshow('mask',mask)
+cv2.imshow('res',res)
+k = cv2.waitKey(5) & 0xFF
+if k == ord("c"):
+    break
+
+cv2.destroyAllWindows()
