@@ -9,7 +9,7 @@ import numpy as np
 def nothing(x):
   pass
 
-img = cv2.imread("img5.png")
+img = cv2.imread("img3.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 hsvImg[...,2] = hsvImg[...,2]*0.7
