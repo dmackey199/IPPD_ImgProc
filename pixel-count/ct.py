@@ -15,6 +15,7 @@ import matplotlib.pyplot as plt
 # plt.title('brightened image'), plt.xticks([]), plt.yticks([])
 # plt.show()
 
-white = np.uint8([[[255,255,255 ]]])
+# white = np.uint8([[[255,255,255 ]]])
+white = np.uint8([[[0,255,0]]])
 hsv_white = cv2.cvtColor(white,cv2.COLOR_BGR2HSV)
 print(hsv_white)
