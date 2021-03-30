@@ -32,12 +32,11 @@ mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
 # Bitwise-AND mask and original image
 res = cv2.bitwise_and(hsv,hsv, mask= mask)
-
-cv2.imshow('frame',hsv)
-cv2.imshow('mask',mask)
-cv2.imshow('res',res)
-k = cv2.waitKey(5) & 0xFF
-if k == ord("c"):
-    break
-
+while(1):
+    cv2.imshow('frame',hsv)
+    cv2.imshow('mask',mask)
+    cv2.imshow('res',res)
+    k = cv2.waitKey(5) & 0xFF
+    if k == ord("c"):
+        break
 cv2.destroyAllWindows()
