@@ -32,6 +32,10 @@ mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
 # Bitwise-AND mask and original image
 res = cv2.bitwise_and(hsv,hsv, mask= mask)
+
+cv2.namedWindow("hsv")
+cv2.namedWindow("mask")
+cv2.namedWindow("res")
 while(1):
     cv2.imshow('frame',hsv)
     cv2.imshow('mask',mask)
