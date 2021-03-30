@@ -37,7 +37,7 @@ cv2.namedWindow("hsv")
 cv2.namedWindow("mask")
 cv2.namedWindow("res")
 while(1):
-    cv2.imshow('frame',hsv)
+    cv2.imshow('hsv',hsv)
     cv2.imshow('mask',mask)
     cv2.imshow('res',res)
     k = cv2.waitKey(5) & 0xFF
