@@ -6,14 +6,32 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
+def nothing(x):
+  pass
+
 img = cv2.imread("img4.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 hsvImg[...,2] = hsvImg[...,2]*0.5
 
-plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
-plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-plt.show()
+cv2.namedWindow('image')
+cv2.createTrackbar('min','image',0,255,nothing)
+cv2.createTrackbar('max','image',0,255,nothing)
+
+cv2.namedWindow('Threshold')
+while(1):
+    a = cv2.getTrackbarPos('min','image')
+    b = cv2.getTrackbarPos('max','image')
+    ret,thresh=cv2.threshold(hsvImg,a,b,cv2.THRESH_BINARY_INV)
+    # ret,thresh=cv2.threshold(hsvImg,125,230,cv2.THRESH_BINARY_INV)
+    cv2.imshow("Threshold",thresh)
+    k = cv2.waitKey(10) & 0xFF
+    if k == ord("c"):
+		  break
+
+# plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
+# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
+# plt.show()
 
 # white = np.uint8([[[255,255,255 ]]])
 # white = np.uint8([[[0,255,0]]])
