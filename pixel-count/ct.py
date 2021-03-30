@@ -33,14 +33,18 @@ mask = cv2.inRange(hsv, lower_blue, upper_blue)
 # Bitwise-AND mask and original image
 res = cv2.bitwise_and(hsv,hsv, mask= mask)
 
+plt.subplot(111), plt.imshow(cv2.cvtColor(res,cv2.COLOR_HSV2RGB))
+plt.title('brightened image'), plt.xticks([]), plt.yticks([])
+plt.show()
+
 # cv2.namedWindow('hsv')
 # cv2.namedWindow('mask')
-cv2.namedWindow('res')
-while(1):
-    # cv2.imshow('hsv',hsv)
-    # cv2.imshow('mask',mask)
-    cv2.imshow('res',res)
-    k = cv2.waitKey(5) & 0xFF
-    if k == ord("c"):
-        break
-cv2.destroyAllWindows()
+# cv2.namedWindow('res')
+# while(1):
+#     # cv2.imshow('hsv',hsv)
+#     # cv2.imshow('mask',mask)
+#     cv2.imshow('res',res)
+#     k = cv2.waitKey(5) & 0xFF
+#     if k == ord("c"):
+#         break
+# cv2.destroyAllWindows()
