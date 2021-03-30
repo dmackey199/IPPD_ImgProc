@@ -7,13 +7,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 img = cv2.imread("img3.png")
-# hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
-# hsvImg[...,2] = hsvImg[...,2]*0.4
+hsvImg[...,2] = hsvImg[...,2]*0.4
 
-# plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
-# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-# plt.show()
+plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
+plt.title('brightened image'), plt.xticks([]), plt.yticks([])
+plt.show()
 
 # white = np.uint8([[[255,255,255 ]]])
 # white = np.uint8([[[0,255,0]]])
@@ -21,21 +21,21 @@ img = cv2.imread("img3.png")
 # print(hsv_white)
 
 # Convert BGR to HSV
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+# hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
-# define range of blue color in HSV
-lower_blue = np.array([0,50,50])
-upper_blue = np.array([20,255,255])
+# # define range of blue color in HSV
+# lower_blue = np.array([0,50,50])
+# upper_blue = np.array([20,255,255])
 
-# Threshold the HSV image to get only blue colors
-mask = cv2.inRange(hsv, lower_blue, upper_blue)
+# # Threshold the HSV image to get only blue colors
+# mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
-# Bitwise-AND mask and original image
-res = cv2.bitwise_and(hsv,hsv, mask= mask)
+# # Bitwise-AND mask and original image
+# res = cv2.bitwise_and(hsv,hsv, mask= mask)
 
-plt.subplot(111), plt.imshow(cv2.cvtColor(res,cv2.COLOR_HSV2RGB))
-plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-plt.show()
+# plt.subplot(111), plt.imshow(cv2.cvtColor(res,cv2.COLOR_HSV2RGB))
+# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
+# plt.show()
 
 # cv2.namedWindow('hsv')
 # cv2.namedWindow('mask')
