@@ -9,20 +9,21 @@ import numpy as np
 def nothing(x):
   pass
 
-img = cv2.imread("img4.png")
+img = cv2.imread("img5.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 hsvImg[...,2] = hsvImg[...,2]*0.5
 
-cv2.namedWindow('refHole')
-cv2.createTrackbar('min','refHole',0,255,nothing)
-cv2.createTrackbar('max','refHole',0,255,nothing)
+# cv2.namedWindow('refHole')
+# cv2.createTrackbar('min','refHole',0,255,nothing)
+# cv2.createTrackbar('max','refHole',0,255,nothing)
 cv2.namedWindow('RefThreshold')
 while(1):
-    a = cv2.getTrackbarPos('min','refHole')
-    b = cv2.getTrackbarPos('max','refHole')
-    ret,thresh=cv2.threshold(hsvImg,a,b,cv2.THRESH_BINARY_INV)
-    cv2.imshow("RefThreshold",thresh)
+    # a = cv2.getTrackbarPos('min','refHole')
+    # b = cv2.getTrackbarPos('max','refHole')
+    # ret,thresh=cv2.threshold(hsvImg,a,b,cv2.THRESH_BINARY_INV)
+    # cv2.imshow("RefThreshold",thresh)
+    cv2.imshow("RefThreshold",hsvImg)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
       break
