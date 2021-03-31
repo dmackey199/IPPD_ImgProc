@@ -203,7 +203,7 @@ while(1):
 # cv2.createTrackbar('min','ear',0,255,nothing)
 # cv2.createTrackbar('max','ear',0,255,nothing)
 hsvImg = cv2.cvtColor(earPic,cv2.COLOR_BGR2HSV)
-hsvImg[...,2] = hsvImg[...,2]*0.7
+hsvImg[...,2] = hsvImg[...,2]*0.3
 hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,3,15,7,21)
 
 hMin = 69
