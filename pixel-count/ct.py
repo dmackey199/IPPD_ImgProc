@@ -14,7 +14,7 @@ def nothing(x):
 
 # hsvImg[...,2] = hsvImg[...,2]*0.7
 
-img = cv2.imread("img4.png", cv2.COLOR_GRAY2BGR)
+img = cv2.imread("img4.png")
 hsvImg = cv2.fastNlMeansDenoisingColored(img,None,10,10,7,21)
 
 cv2.namedWindow('refHole')
