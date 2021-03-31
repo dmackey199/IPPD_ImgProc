@@ -246,7 +246,9 @@ print("Ear Pixel Area: ", earPixelArea, " pixels")
 
 cv2.namedWindow('EarHSV')
 cv2.namedWindow('hsvImg')
+cv2.namedWindow('mask')
 while(1):
+    cv2.imshow("mask",mask)
     cv2.imshow("hsvImg",hsvImg)
     cv2.imshow("EarHSV",earPic)
     k = cv2.waitKey(10) & 0xFF
