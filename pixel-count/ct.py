@@ -9,13 +9,13 @@ import numpy as np
 def nothing(x):
   pass
 
-# img = cv2.imread("img4.png")
-# hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
-
-# hsvImg[...,2] = hsvImg[...,2]*0.7
-
 img = cv2.imread("img4.png")
-hsvImg = cv2.fastNlMeansDenoisingColored(img,None,10,10,7,21)
+hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
+
+hsvImg[...,2] = hsvImg[...,2]*0.7
+
+# img = cv2.imread("img4.png")
+# hsvImg = cv2.fastNlMeansDenoisingColored(img,None,10,10,7,21)
 
 cv2.namedWindow('refHole')
 cv2.createTrackbar('min','refHole',0,255,nothing)
