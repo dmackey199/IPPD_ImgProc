@@ -28,6 +28,8 @@ cv2.createTrackbar('sMin','refHole',0,255,nothing)
 cv2.createTrackbar('sMax','refHole',0,255,nothing)
 cv2.createTrackbar('vMin','refHole',0,255,nothing)
 cv2.createTrackbar('vMax','refHole',0,255,nothing)
+cv2.namedWindow('hsvImg')
+cv2.namedWindow('mask')
 
 # cv2.namedWindow('refHole')
 # cv2.createTrackbar('h','refHole',0,20,nothing)
@@ -55,6 +57,8 @@ while(1):
     mask = cv2.inRange(hsvImg, lowerBound, upperBound)
     res = cv2.bitwise_and(img,img, mask=mask)
     cv2.imshow("RefThreshold",res)
+    cv2.imshow("hsvImg",hsvImg)
+    cv2.imshow("mask",mask)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
       break
@@ -117,4 +121,4 @@ while(1):
 #     k = cv2.waitKey(5) & 0xFF
 #     if k == ord("c"):
 #         break
-# cv2.destroyAllWindows()
+cv2.destroyAllWindows()
