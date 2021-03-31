@@ -17,7 +17,7 @@ from scipy.spatial import distance
 def nothing(x):
   pass
 
-img = cv2.imread("img4.png")
+img = cv2.imread("img6.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
 hsvImg[...,2] = hsvImg[...,2]*0.3
@@ -36,7 +36,7 @@ hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,3,15,7,21)
 # cv2.createTrackbar('sMax','refHole',0,255,nothing)
 # cv2.createTrackbar('vMin','refHole',0,255,nothing)
 # cv2.createTrackbar('vMax','refHole',0,255,nothing)
-# cv2.namedWindow('hsvImg')
+cv2.namedWindow('hsvImg')
 # cv2.namedWindow('mask')
 
 # cv2.namedWindow('refHole')
@@ -116,6 +116,7 @@ while(1):
     # if k == ord("c"):
     #     break
 
+    cv2.imshow("hsvImg",hsvImg)
     cv2.imshow("RefThreshold",img)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
