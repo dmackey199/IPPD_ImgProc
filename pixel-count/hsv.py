@@ -156,7 +156,7 @@ for i in range(len(contours)):
 if(len(chosen_contours) == 0):
   print("No Eye Contours found!")
 sorted_contours, boundingBoxes = sort_contours(chosen_contours, "top-to-bottom")
-print(cv2.contourArea(sorted_contours[0]))
+print("Eye Pixel Area: ", cv2.contourArea(sorted_contours[0]), " pixels")
 x,y,w,h = cv2.boundingRect(sorted_contours[0])
 
 # earCrop = [(x-250,y-50), (x-170, y + h/2)]
