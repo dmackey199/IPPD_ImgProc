@@ -20,7 +20,7 @@ def nothing(x):
 img = cv2.imread("img6.png")
 hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 
-hsvImg[...,2] = hsvImg[...,2]*0.5
+hsvImg[...,2] = hsvImg[...,2]*0.7
 
 hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,3,15,7,21)
 
