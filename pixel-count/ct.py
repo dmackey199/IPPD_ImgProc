@@ -61,8 +61,8 @@ while(1):
 
     h = cv2.getTrackbarPos('h','refHole')
     hColor = cv2.getTrackbarPos('hColor','refHole')
-    hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,h,hColor,7,21)
-    cv2.imshow("RefThreshold",hsvImg)
+    newImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,h,hColor,7,21)
+    cv2.imshow("RefThreshold",newImg)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
         break
