@@ -74,19 +74,20 @@ for cnt in earContours:
     centerCnt.append({'contour': cnt, 'center': contour_center, 'distance_to_center': distances_to_center})
 
     # draw each contour (red)
-    cv2.drawContours(img, [cnt], 0, (0, 50, 255), 2)
-    # M = cv2.moments(cnt)
+    # cv2.drawContours(img, [cnt], 0, (0, 50, 255), 2)
 
     # draw center of contour (green)
-    cv2.circle(img, contour_center, 3, (100, 255, 0), 2)
+    # cv2.circle(img, contour_center, 3, (100, 255, 0), 2)
     
     # sort the buildings
 sorted_cnts = sorted(centerCnt, key=lambda i: i['distance_to_center'])
 
 # find contour of closest building to center and draw it (blue)
 earHole = sorted_cnts[0]['contour']
-cv2.drawContours(img, [earHole], 0, (255, 0, 0), 2)
+# cv2.drawContours(img, [earHole], 0, (255, 0, 0), 2)
 
+earPixelArea = cv2.contourArea(earHole)
+print(earPixelArea)
 
 cv2.namedWindow('RefThreshold')
 while(1):
