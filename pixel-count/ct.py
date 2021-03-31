@@ -56,16 +56,16 @@ invert = cv2.bitwise_not(mask)
 earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 (h, w) = img.shape[:2]
 image_center = (w//2, h//2)
-print(len(image_center))
 cv2.circle(img, image_center, 3, (255, 100, 0), 2)
 centerCnt = []
 
+# Sorting by close to center : https://stackoverflow.com/questions/61541559/finding-the-contour-closest-to-image-center-in-opencv2
 for cnt in earContours:
         # find center of each contour
     M = cv2.moments(cnt)
-    center_X = int(M["m10"] / M["m00"])
-    center_Y = int(M["m01"] / M["m00"])
-    contour_center = (center_X, center_Y)
+    cX = int(M["m10"] / M["m00"])
+    cY = int(M["m01"] / M["m00"])
+    contour_center = (cX, cY)
 
     # calculate distance to image_center
     distances_to_center = (distance.euclidean(image_center, contour_center))
@@ -75,17 +75,17 @@ for cnt in earContours:
 
     # draw each contour (red)
     cv2.drawContours(img, [cnt], 0, (0, 50, 255), 2)
-    M = cv2.moments(cnt)
+    # M = cv2.moments(cnt)
 
     # draw center of contour (green)
     cv2.circle(img, contour_center, 3, (100, 255, 0), 2)
     
     # sort the buildings
-sorted_buildings = sorted(centerCnt, key=lambda i: i['distance_to_center'])
+sorted_cnts = sorted(centerCnt, key=lambda i: i['distance_to_center'])
 
 # find contour of closest building to center and draw it (blue)
-center_building_contour = sorted_buildings[0]['contour']
-cv2.drawContours(img, [center_building_contour], 0, (255, 0, 0), 2)
+earHole = sorted_cnts[0]['contour']
+cv2.drawContours(img, [earHole], 0, (255, 0, 0), 2)
 
 
 cv2.namedWindow('RefThreshold')
