@@ -15,11 +15,25 @@ hsvImg = cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
 hsvImg[...,2] = hsvImg[...,2]*0.3
 
 # img = cv2.imread("img4.png")
-hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,10,10,7,21)
+# hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,10,10,7,21)
 
 # cv2.namedWindow('refHole')
 # cv2.createTrackbar('min','refHole',0,255,nothing)
 # cv2.createTrackbar('max','refHole',0,255,nothing)
+
+# cv2.namedWindow('refHole')
+# cv2.createTrackbar('hMin','refHole',0,179,nothing)
+# cv2.createTrackbar('hMax','refHole',0,179,nothing)
+# cv2.createTrackbar('sMin','refHole',0,255,nothing)
+# cv2.createTrackbar('sMax','refHole',0,255,nothing)
+# cv2.createTrackbar('vMin','refHole',0,255,nothing)
+# cv2.createTrackbar('vMax','refHole',0,255,nothing)
+
+cv2.namedWindow('refHole')
+cv2.createTrackbar('h','refHole',0,20,nothing)
+cv2.createTrackbar('hColor','refHole',0,20,nothing)
+
+
 cv2.namedWindow('RefThreshold')
 while(1):
     # a = cv2.getTrackbarPos('min','refHole')
@@ -30,10 +44,42 @@ while(1):
     # if k == ord("c"):
     #     break
 
+    # hMin = cv2.getTrackbarPos('hMin','refHole')
+    # hMax = cv2.getTrackbarPos('hMax','refHole')
+    # sMin = cv2.getTrackbarPos('sMin','refHole')
+    # sMax = cv2.getTrackbarPos('sMax','refHole')
+    # vMin = cv2.getTrackbarPos('vMin','refHole')
+    # vMax = cv2.getTrackbarPos('vMax','refHole')
+    # lowerBound = np.array([hMin,sMin,vMin])
+    # upperBound = np.array([hMax,sMax,vMax])
+    # mask = cv2.inRange(hsvImg, lowerBound, upperBound)
+    # res = cv2.bitwise_and(img,img, mask=mask)
+    # cv2.imshow("RefThreshold",res)
+    # k = cv2.waitKey(10) & 0xFF
+    # if k == ord("c"):
+    #   break
+
+    h = cv2.getTrackbarPos('h','refHole')
+    hColor = cv2.getTrackbarPos('hColor','refHole')
+    hsvImg = cv2.fastNlMeansDenoisingColored(hsvImg,None,h,hColor,7,21)
     cv2.imshow("RefThreshold",hsvImg)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
-      break
+        break
+
+    # cv2.imshow("RefThreshold",hsvImg)
+    # k = cv2.waitKey(10) & 0xFF
+    # if k == ord("c"):
+    #   break
+
+
+
+
+
+
+
+
+
 
 # plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
 # plt.title('brightened image'), plt.xticks([]), plt.yticks([])
