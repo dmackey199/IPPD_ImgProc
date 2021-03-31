@@ -54,8 +54,8 @@ upperBound = np.array([hMax,sMax,vMax])
 mask = cv2.inRange(hsvImg, lowerBound, upperBound)
 invert = cv2.bitwise_not(mask)
 earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-image_center = np.asarray(img.shape) / 2
-image_center = tuple(image_center.astype('int32'))
+(h, w) = img.shape[:2]
+image_center = (w//2, h//2)
 print(len(image_center))
 cv2.circle(img, image_center, 3, (255, 100, 0), 2)
 centerCnt = []
