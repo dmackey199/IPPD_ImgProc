@@ -11,6 +11,7 @@
 
 import cv2
 import numpy as np
+from scipy.spatial import distance
 # import matplotlib.pyplot as plt
 
 def nothing(x):
@@ -52,6 +53,38 @@ lowerBound = np.array([hMin,sMin,vMin])
 upperBound = np.array([hMax,sMax,vMax])
 mask = cv2.inRange(hsvImg, lowerBound, upperBound)
 invert = cv2.bitwise_not(mask)
+earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+image_center = np.asarray(img.shape) / 2
+image_center = tuple(image_center.astype('int32'))
+cv2.circle(img, image_center, 3, (255, 100, 0), 2)
+centerCnt = []
+
+for cnt in earContours:
+        # find center of each contour
+    M = cv2.moments(cnt)
+    center_X = int(M["m10"] / M["m00"])
+    center_Y = int(M["m01"] / M["m00"])
+    contour_center = (center_X, center_Y)
+
+    # calculate distance to image_center
+    distances_to_center = (distance.euclidean(image_center, contour_center))
+
+    # save to a list of dictionaries
+    centerCnt.append({'contour': cnt, 'center': contour_center, 'distance_to_center': distances_to_center})
+
+    # draw each contour (red)
+    cv2.drawContours(img, [cnt], 0, (0, 50, 255), 2)
+    M = cv2.moments(cnt)
+
+    # draw center of contour (green)
+    cv2.circle(img, contour_center, 3, (100, 255, 0), 2)
+    
+    # sort the buildings
+sorted_buildings = sorted(centerCnt, key=lambda i: i['distance_to_center'])
+
+# find contour of closest building to center and draw it (blue)
+center_building_contour = sorted_buildings[0]['contour']
+cv2.drawContours(img, [center_building_contour], 0, (255, 0, 0), 2)
 
 
 cv2.namedWindow('RefThreshold')
@@ -89,7 +122,7 @@ while(1):
     # if k == ord("c"):
     #     break
 
-    cv2.imshow("RefThreshold",invert)
+    cv2.imshow("RefThreshold",img)
     k = cv2.waitKey(10) & 0xFF
     if k == ord("c"):
       break
