@@ -56,38 +56,30 @@ invert = cv2.bitwise_not(mask)
 earContours, earHierarchy = cv2.findContours(invert, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 (h, w) = img.shape[:2]
 image_center = (w//2, h//2)
-cv2.circle(img, image_center, 3, (255, 100, 0), 2)
+# cv2.circle(img, image_center, 3, (255, 100, 0), 2)
 centerCnt = []
-
 # Sorting by close to center : https://stackoverflow.com/questions/61541559/finding-the-contour-closest-to-image-center-in-opencv2
 for cnt in earContours:
-        # find center of each contour
+    # find center of each contour
     M = cv2.moments(cnt)
     cX = int(M["m10"] / M["m00"])
     cY = int(M["m01"] / M["m00"])
     contour_center = (cX, cY)
-
     # calculate distance to image_center
     distances_to_center = (distance.euclidean(image_center, contour_center))
-
     # save to a list of dictionaries
     centerCnt.append({'contour': cnt, 'center': contour_center, 'distance_to_center': distances_to_center})
-
     # draw each contour (red)
     # cv2.drawContours(img, [cnt], 0, (0, 50, 255), 2)
-
     # draw center of contour (green)
     # cv2.circle(img, contour_center, 3, (100, 255, 0), 2)
-    
     # sort the buildings
 sorted_cnts = sorted(centerCnt, key=lambda i: i['distance_to_center'])
-
 # find contour of closest building to center and draw it (blue)
 earHole = sorted_cnts[0]['contour']
-# cv2.drawContours(img, [earHole], 0, (255, 0, 0), 2)
-
+cv2.drawContours(img, [earHole], 0, (255, 0, 0), 2)
 earPixelArea = cv2.contourArea(earHole)
-print(earPixelArea)
+print("Ear Pixel Area: ", earPixelArea, " pixels")
 
 cv2.namedWindow('RefThreshold')
 while(1):
@@ -130,48 +122,4 @@ while(1):
       break
 
 
-
-
-
-
-
-
-
-
-# plt.subplot(111), plt.imshow(cv2.cvtColor(hsvImg,cv2.COLOR_HSV2RGB))
-# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-# plt.show()
-
-# white = np.uint8([[[255,255,255 ]]])
-# white = np.uint8([[[0,255,0]]])
-# hsv_white = cv2.cvtColor(white,cv2.COLOR_BGR2HSV)
-# print(hsv_white)
-
-# Convert BGR to HSV
-# hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
-# # define range of blue color in HSV
-# lower_blue = np.array([0,50,50])
-# upper_blue = np.array([20,255,255])
-
-# # Threshold the HSV image to get only blue colors
-# mask = cv2.inRange(hsv, lower_blue, upper_blue)
-
-# # Bitwise-AND mask and original image
-# res = cv2.bitwise_and(hsv,hsv, mask= mask)
-
-# plt.subplot(111), plt.imshow(cv2.cvtColor(res,cv2.COLOR_HSV2RGB))
-# plt.title('brightened image'), plt.xticks([]), plt.yticks([])
-# plt.show()
-
-# cv2.namedWindow('hsv')
-# cv2.namedWindow('mask')
-# cv2.namedWindow('res')
-# while(1):
-#     # cv2.imshow('hsv',hsv)
-#     # cv2.imshow('mask',mask)
-#     cv2.imshow('res',res)
-#     k = cv2.waitKey(5) & 0xFF
-#     if k == ord("c"):
-#         break
 cv2.destroyAllWindows()
